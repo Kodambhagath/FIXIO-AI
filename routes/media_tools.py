@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, render_template, request, redirect, url_for, flash, send_from_directory, current_app
+from flask import Blueprint, render_template, request, redirect, flash, send_from_directory, current_app
 from werkzeug.utils import secure_filename
 import uuid
 from utils.file_handler import allowed_file

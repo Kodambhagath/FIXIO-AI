@@ -1,14 +1,15 @@
-{% extends 'base.html' %}
-
-{% block title %}Watermark Remover - Fixio{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Watermark Remover - Fixio{% endblock
+%} {% block content %}
 <div class="row mb-4">
     <div class="col-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Watermark Remover</li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Watermark Remover
+                </li>
             </ol>
         </nav>
         <h1 class="display-5 mb-3">Watermark Remover</h1>
@@ -20,59 +21,95 @@
     <div class="col-lg-8 col-md-10 mx-auto">
         <div class="card bg-dark">
             <div class="card-body">
-                <form action="{{ url_for('pdf_tools.watermark_remover_process') }}" method="post" enctype="multipart/form-data" class="processing-form">
+                <form
+                    action="{{ url_for('pdf_tools.watermark_remover_process') }}"
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="processing-form"
+                >
                     <div class="file-upload-container mb-4">
                         <div class="file-upload">
                             <i class="fas fa-stamp file-upload-icon"></i>
-                            <p class="upload-text mb-2">Click or drag PDF here to upload</p>
-                            <p class="upload-hint text-muted">Upload a PDF file to remove watermarks</p>
-                            <input type="file" name="file" accept=".pdf" class="file-input d-none">
+                            <p class="upload-text mb-2">
+                                Click or drag PDF here to upload
+                            </p>
+                            <p class="upload-hint text-muted">
+                                Upload a PDF file to remove watermarks
+                            </p>
+                            <input
+                                type="file"
+                                name="file"
+                                accept=".pdf"
+                                class="file-input d-none"
+                            />
                         </div>
                         <div class="file-list mt-3"></div>
                     </div>
-                    
+
                     <div class="form-group mb-4">
-                        <label for="output_filename" class="form-label">Output Filename</label>
-                        <input type="text" class="form-control" id="output_filename" name="output_filename" placeholder="clean_document.pdf" value="clean_document.pdf">
+                        <label for="output_filename" class="form-label"
+                            >Output Filename</label
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="output_filename"
+                            name="output_filename"
+                            placeholder="clean_document.pdf"
+                            value="clean_document.pdf"
+                        />
                     </div>
-                    
+
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-eraser me-2"></i>Remove Watermark
                         </button>
                     </div>
                 </form>
-                
+
                 {% if result_file %}
                 <div class="mt-4 preview-area">
                     <div class="alert alert-success">
-                        <i class="fas fa-check-circle me-2"></i>Watermark removal process completed!
+                        <i class="fas fa-check-circle me-2"></i>Watermark
+                        removal process completed!
                     </div>
                     <div class="text-center mt-3">
-                        <a href="{{ url_for('pdf_tools.download_file', filename=result_file) }}" class="btn btn-success">
-                            <i class="fas fa-download me-2"></i>Download Processed PDF
+                        <a
+                            href="{{ url_for('pdf_tools.download_file', filename=result_file) }}"
+                            class="btn btn-success"
+                        >
+                            <i class="fas fa-download me-2"></i>Download
+                            Processed PDF
                         </a>
                     </div>
                 </div>
                 {% endif %}
             </div>
         </div>
-        
-        <div class="card bg-dark mt-4">
+
+        <div class="card bg-light mt-4">
             <div class="card-header">
                 <h5 class="mb-0">About Watermark Removal</h5>
             </div>
             <div class="card-body">
-                <p>This tool attempts to remove basic watermarks from PDF documents. It works best with:</p>
+                <p>
+                    This tool attempts to remove basic watermarks from PDF
+                    documents. It works best with:
+                </p>
                 <ul>
                     <li>Simple text-based watermarks</li>
                     <li>Consistent watermark patterns</li>
                     <li>Watermarks added as annotation layers</li>
                 </ul>
                 <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle me-2"></i>Note: Complex or embedded watermarks may not be fully removed. Results may vary depending on how the watermark was applied.
+                    <i class="fas fa-exclamation-triangle me-2"></i>Note:
+                    Complex or embedded watermarks may not be fully removed.
+                    Results may vary depending on how the watermark was applied.
                 </div>
-                <p>Please ensure you have the right to modify the document and respect copyright laws.</p>
+                <p>
+                    Please ensure you have the right to modify the document and
+                    respect copyright laws.
+                </p>
             </div>
         </div>
     </div>
