@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Fixio - AI-Powered Document Management{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <i class="fas fa-file-alt me-2"></i>Fixio
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('index') }}">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/tools' %}active{% endif %}" href="{{ url_for('index', _anchor='tools') }}">
+                            <i class="fas fa-toolbox me-1"></i> Tools
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/features' %}active{% endif %}" href="{{ url_for('static_pages.features') }}">
+                            <i class="fas fa-star me-1"></i> Features
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/pricing' %}active{% endif %}" href="{{ url_for('static_pages.pricing') }}">
+                            <i class="fas fa-tags me-1"></i> Pricing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/blog' %}active{% endif %}" href="{{ url_for('static_pages.blog') }}">
+                            <i class="fas fa-blog me-1"></i> Blog
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pdfDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-file-pdf me-1"></i> PDF Tools
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="pdfDropdown">
+                            <li><h6 class="dropdown-header">Organize</h6></li>
+                            <li><a class="dropdown-item" href="{{ url_for('pdf_tools.pdf_merger') }}">Merge PDFs</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('pdf_tools.pdf_pages_recovery') }}">Extract Pages</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><h6 class="dropdown-header">Edit</h6></li>
+                            <li><a class="dropdown-item" href="{{ url_for('pdf_tools.watermark_remover') }}">Remove Watermark</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><h6 class="dropdown-header">Security</h6></li>
+                            <li><a class="dropdown-item" href="/pdf/protect">Password Protect</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="docDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-file-alt me-1"></i> Document Tools
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="docDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('doc_tools.doc_converter') }}">Document Converter</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('doc_tools.ai_excel_editor') }}">AI Excel Editor</a></li>
+                            <li><a class="dropdown-item" href="/excel/ai-edit">Excel AI Editor</a></li>
+                            <li><a class="dropdown-item" href="/word/ai-edit">Word AI Editor</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('editor_tools.certificate_editor') }}">Certificate Editor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="imageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-image me-1"></i> Image Tools
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="imageDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('image_tools.image_converter') }}">Image Converter</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('image_tools.background_remover') }}">Background Remover</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('image_tools.image_compressor') }}">Image Compressor</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-photo-video me-1"></i> Media
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="mediaDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('media_tools.audio_to_video') }}">Audio to Video</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="batchDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-layer-group me-1"></i> Batch Processing
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="batchDropdown">
+                            <li><a class="dropdown-item" href="/batch/image">Batch Image Processing</a></li>
+                            <li><a class="dropdown-item" href="/batch/pdf">Batch PDF Processing</a></li>
+                            <li><a class="dropdown-item" href="/batch/document">Batch Document Processing</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/dashboard' %}active{% endif %}" href="/dashboard">
+                            <i class="fas fa-chart-pie me-1"></i> Dashboard
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/assistant' %}active{% endif %}" href="{{ url_for('assistant_bp.assistant') }}">
+                            <i class="fas fa-robot me-1"></i> AI Assistant
+                        </a>
+                    </li>
+                    
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-1"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('auth.profile') }}">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login' %}active{% endif %}" href="{{ url_for('auth.login') }}">
+                            <i class="fas fa-sign-in-alt me-1"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/register' %}active{% endif %}" href="{{ url_for('auth.register') }}">
+                            <i class="fas fa-user-plus me-1"></i> Register
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-4">
+        <!-- Alert Container -->
+        <div class="alert-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h4 class="mb-3"><i class="fas fa-file-alt me-2"></i>Fixio</h4>
+                    <p class="text-secondary mb-4">Advanced AI-powered document management and editing tools to streamline your workflow and boost productivity.</p>
+                    <div class="d-flex gap-3 mb-4">
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-link-group">
+                        <h5 class="footer-link-title">Tools</h5>
+                        <ul class="footer-link-list">
+                            <li><a href="{{ url_for('pdf_tools.pdf_merger') }}">PDF Tools</a></li>
+                            <li><a href="{{ url_for('image_tools.image_converter') }}">Image Tools</a></li>
+                            <li><a href="{{ url_for('doc_tools.doc_converter') }}">Document Tools</a></li>
+                            <li><a href="{{ url_for('media_tools.audio_to_video') }}">Media Tools</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-link-group">
+                        <h5 class="footer-link-title">Company</h5>
+                        <ul class="footer-link-list">
+                            <li><a href="{{ url_for('static_pages.about') }}">About Us</a></li>
+                            <li><a href="{{ url_for('static_pages.features') }}">Features</a></li>
+                            <li><a href="{{ url_for('static_pages.pricing') }}">Pricing</a></li>
+                            <li><a href="{{ url_for('static_pages.blog') }}">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-link-group">
+                        <h5 class="footer-link-title">Support</h5>
+                        <ul class="footer-link-list">
+                            <li><a href="{{ url_for('static_pages.support') }}">Help Center</a></li>
+                            <li><a href="{{ url_for('static_pages.faq') }}">FAQ</a></li>
+                            <li><a href="{{ url_for('static_pages.support') }}">Contact Us</a></li>
+                            <li><a href="{{ url_for('static_pages.privacy') }}">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-text">© 2025 Fixio - AI-Powered Document Management. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Background Remover - Fixio{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Background Remover</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mb-3">Background Remover</h1>
+        <p class="lead">Automatically remove backgrounds from images using AI</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <form action="{{ url_for('image_tools.background_remover_process') }}" method="post" enctype="multipart/form-data" class="processing-form">
+                    <div class="file-upload-container mb-4">
+                        <div class="file-upload">
+                            <i class="fas fa-cut file-upload-icon"></i>
+                            <p class="upload-text mb-2">Click or drag image here to upload</p>
+                            <p class="upload-hint text-muted">Upload an image with a background to remove</p>
+                            <input type="file" name="file" accept=".jpg,.jpeg,.png" class="file-input d-none">
+                        </div>
+                        <div class="file-list mt-3"></div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-cut me-2"></i>Remove Background
+                        </button>
+                    </div>
+                </form>
+                
+                {% if result_file %}
+                <div class="mt-4 preview-area">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>Background removed successfully!
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center mb-3">
+                            <h6>Original Image</h6>
+                            <img src="{{ url_for('image_tools.preview_image', filename=original_file) }}" class="img-fluid mb-3 preview-image" alt="Original image">
+                        </div>
+                        <div class="col-md-6 text-center mb-3">
+                            <h6>Processed Image</h6>
+                            <img src="{{ url_for('image_tools.preview_image', filename=result_file) }}" class="img-fluid mb-3 preview-image" alt="Image without background">
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="{{ url_for('image_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                            <i class="fas fa-download me-2"></i>Download Image
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card bg-dark mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">How Background Removal Works</h5>
+            </div>
+            <div class="card-body">
+                <p>Our background removal tool uses advanced AI technology to automatically detect and remove the background from your images, creating a transparent PNG.</p>
+                <p>For best results:</p>
+                <ul>
+                    <li>Use images with clear contrast between subject and background</li>
+                    <li>Ensure your subject is well-lit</li>
+                    <li>Higher resolution images will produce better quality results</li>
+                </ul>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>Processed images are saved as transparent PNG files, perfect for graphic design work.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

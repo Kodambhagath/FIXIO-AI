@@ -1,0 +1,56 @@
+Create a feature-rich **Fixio** web application that provides a range of tools for editing and converting documents, similar to **I Love PDF**. The app should be easy to use and allow users to upload, edit, and modify their files online with various document processing features.
+
+### Features to Implement:
+
+1. **AI-based Excel Editing Tool**:
+   - Allow users to upload **Excel files** (XLSX or CSV).
+   - Let users input **plain text commands** such as:
+     - "Remove duplicates from column A"
+     - "Rename column 'Name' to 'Full Name'"
+     - "Sort data by column 'Date'"
+     - "Filter rows where 'Age' > 30"
+   - The app should process the file and return the modified version for download.
+
+2. **PDF and PPT Editing Tools**:
+   - **Merge PDF**: Allow users to merge multiple PDFs into one.
+   - **Split PDF**: Allow users to split one PDF into multiple parts.
+   - **PDF to Word**: Convert a PDF into an editable Word document.
+   - **Add or Remove Watermarks**: Users can add or remove watermarks from PDFs or PPTs.
+   - **Lock PDF/PPT with Password**: Allow users to **lock** a PDF or PPT document with a password, making it protected.
+   - **Remove password protection from PDF/PPT** (where applicable).
+   - **Convert PDF to Image** (JPG or PNG).
+   
+3. **Image and File Conversion Tools**:
+   - **Image Format Conversion**: Convert images from one format to another (e.g., PNG to JPG).
+   - **Resize Images**: Resize images to different dimensions.
+   - **PDF to Image**: Convert PDF files to images (JPG/PNG).
+   - **Compress PDFs and Images**: Allow users to compress PDF or image files to reduce file size.
+
+4. **Batch Processing**: 
+   - Allow users to process multiple files at once for PDF, Excel, and image editing.
+   
+5. **User Authentication**: 
+   - Allow users to create accounts and log in, so they can save their processing history and upload/download files at any time.
+
+6. **Simple and Clean UI**: 
+   - Make the website easy to navigate, with clear buttons and tooltips for each feature.
+   - Provide a **drag-and-drop file upload** interface.
+
+7. **Additional Features**:
+   - **Text Extraction from PDFs**: Extract text from scanned or image-based PDF documents.
+   - **Basic Document Editing**: Let users edit text in PDF and PPT files before downloading the final version.
+   - **Multiple Language Support**: Provide multiple language options for the website interface.
+   - **Cloud Integration**: Allow users to upload documents from **Google Drive** or **Dropbox** and save back to the cloud after editing.
+   - **Document Signing**: Allow users to add electronic signatures to PDF and PPT documents.
+
+### Goal:
+- Build a fully functional, **user-friendly web app** with a clean and modern design.
+- The app should support multiple file types (PDF, Excel, PPT, Image files) and provide a wide range of editing tools to users for free or with minimal pricing for premium features.
+
+**Tech Stack**:
+- Frontend: HTML, CSS, JavaScript (React or vanilla)
+- Backend: Flask or Django for handling file uploads, processing, and AI-based functionalities.
+- Libraries: Pandas, openpyxl for Excel; PyPDF2, pdfminer for PDFs; Pillow for images.
+- User authentication can be done using Flask Login or Django’s auth system.
+
+Please include detailed explanations for each feature and how it works with sample code snippets where necessary. 

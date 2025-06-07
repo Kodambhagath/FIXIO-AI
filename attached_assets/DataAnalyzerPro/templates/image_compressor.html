@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Image Compressor - Fixio{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Image Compressor</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mb-3">Image Compressor</h1>
+        <p class="lead">Reduce image file size while maintaining quality</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <form action="{{ url_for('image_tools.image_compressor_process') }}" method="post" enctype="multipart/form-data" class="processing-form">
+                    <div class="file-upload-container mb-4">
+                        <div class="file-upload">
+                            <i class="fas fa-compress-arrows-alt file-upload-icon"></i>
+                            <p class="upload-text mb-2">Click or drag image here to upload</p>
+                            <p class="upload-hint text-muted">Supported formats: JPG, PNG, JPEG</p>
+                            <input type="file" name="file" accept=".jpg,.jpeg,.png" class="file-input d-none">
+                        </div>
+                        <div class="file-list mt-3"></div>
+                    </div>
+                    
+                    <div class="form-group mb-4">
+                        <label for="quality" class="form-label">Compression Level: <span id="quality-value">70%</span></label>
+                        <input type="range" class="form-range" id="quality" name="quality" min="10" max="95" value="70" oninput="document.getElementById('quality-value').textContent = this.value + '%'">
+                        <div class="d-flex justify-content-between">
+                            <small>Higher compression</small>
+                            <small>Better quality</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-compress-arrows-alt me-2"></i>Compress Image
+                        </button>
+                    </div>
+                </form>
+                
+                {% if result_file %}
+                <div class="mt-4 preview-area">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>Image compressed successfully!
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center mb-3">
+                            <h6>Original Image ({{ original_size }})</h6>
+                            <img src="{{ url_for('image_tools.preview_image', filename=original_file) }}" class="img-fluid mb-3 preview-image" alt="Original image">
+                        </div>
+                        <div class="col-md-6 text-center mb-3">
+                            <h6>Compressed Image ({{ compressed_size }})</h6>
+                            <img src="{{ url_for('image_tools.preview_image', filename=result_file) }}" class="img-fluid mb-3 preview-image" alt="Compressed image">
+                            <p class="text-success">Reduced by {{ reduction_percent }}%</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="{{ url_for('image_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                            <i class="fas fa-download me-2"></i>Download Compressed Image
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card bg-dark mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Tips for Image Compression</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Web Usage:</strong> For web images, a compression level of 60-70% usually offers a good balance between quality and file size.</li>
+                    <li><strong>Print Quality:</strong> If you need high-quality images for printing, use 80-90% compression to maintain details.</li>
+                    <li><strong>Email/Messaging:</strong> For sharing via email or messaging apps, 40-60% compression can significantly reduce file size.</li>
+                </ul>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>JPG images typically compress better than PNG files. If your PNG doesn't contain transparency, converting to JPG might give you better compression results.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

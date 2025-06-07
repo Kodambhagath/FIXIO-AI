@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - Thinkly{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">Coming soon!</h1>
+            <div class="separator-line mx-auto mb-4"></div>
+            <p class="lead text-secondary">Fixio's blog will feature:</p>
+            <ul class="list-unstyled mt-4">
+                <li class="mb-3">How-to Guides</li>
+                <li class="mb-3">AI & Productivity Hacks</li>
+                <li class="mb-3">Industry News</li>
+                <li class="mb-3">Feature Updates</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <!-- Featured Article -->
+            <div class="card blog-card featured-blog-card border-0 rounded-4 overflow-hidden mb-5">
+                <div class="featured-badge">Featured</div>
+                <img src="https://source.unsplash.com/random/800x400/?documents" class="card-img-top" alt="Featured post image">
+                <div class="card-body p-4">
+                    <div class="blog-meta mb-2">
+                        <span class="blog-category">Tutorials</span>
+                        <span class="blog-date">April 18, 2025</span>
+                    </div>
+                    <h2 class="h3 card-title mb-3">AI-Powered Document Editing: A Complete Guide</h2>
+                    <p class="card-text mb-4">Learn how to leverage AI to automate repetitive document tasks, enhance content quality, and save hours of work. This comprehensive guide covers text generation, formatting, summarization, and more.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="#" class="btn btn-primary">Read Article</a>
+                        <div class="blog-stats">
+                            <span><i class="fas fa-eye me-1"></i>1.5k</span>
+                            <span><i class="fas fa-comment me-1"></i>32</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Articles -->
+            <h2 class="h4 mb-4">Recent Articles</h2>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card blog-card border-0 rounded-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?pdf" class="card-img-top" alt="Blog post image">
+                        <div class="card-body p-4">
+                            <div class="blog-meta mb-2">
+                                <span class="blog-category">Tips & Tricks</span>
+                                <span class="blog-date">April 15, 2025</span>
+                            </div>
+                            <h3 class="h5 card-title mb-3">5 Advanced PDF Tricks You Didn't Know About</h3>
+                            <p class="card-text">Discover hidden features in our PDF tools that can save you time and enhance your workflow.</p>
+                            <a href="#" class="btn btn-link p-0">Read more <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card blog-card border-0 rounded-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?image-editing" class="card-img-top" alt="Blog post image">
+                        <div class="card-body p-4">
+                            <div class="blog-meta mb-2">
+                                <span class="blog-category">Tutorials</span>
+                                <span class="blog-date">April 10, 2025</span>
+                            </div>
+                            <h3 class="h5 card-title mb-3">Perfect Background Removal in 3 Simple Steps</h3>
+                            <p class="card-text">Learn how to get professional-quality results with our AI-powered background remover tool.</p>
+                            <a href="#" class="btn btn-link p-0">Read more <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card blog-card border-0 rounded-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?excel" class="card-img-top" alt="Blog post image">
+                        <div class="card-body p-4">
+                            <div class="blog-meta mb-2">
+                                <span class="blog-category">Case Studies</span>
+                                <span class="blog-date">April 5, 2025</span>
+                            </div>
+                            <h3 class="h5 card-title mb-3">How a Marketing Agency Saved 20 Hours a Week with Fixio</h3>
+                            <p class="card-text">See how CreativeEdge Agency automated their document workflow and boosted productivity.</p>
+                            <a href="#" class="btn btn-link p-0">Read more <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card blog-card border-0 rounded-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?security" class="card-img-top" alt="Blog post image">
+                        <div class="card-body p-4">
+                            <div class="blog-meta mb-2">
+                                <span class="blog-category">Security</span>
+                                <span class="blog-date">April 1, 2025</span>
+                            </div>
+                            <h3 class="h5 card-title mb-3">Secure Document Sharing: Best Practices in 2025</h3>
+                            <p class="card-text">Learn how to protect sensitive information when sharing documents online.</p>
+                            <a href="#" class="btn btn-link p-0">Read more <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Blog pagination" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Search Box -->
+            <div class="card border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="h5 mb-3">Search</h3>
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search articles...">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="card border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="h5 mb-3">Categories</h3>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2">
+                            <a href="#" class="blog-category-link">
+                                <span>Tutorials</span>
+                                <span class="badge bg-primary rounded-pill">12</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2">
+                            <a href="#" class="blog-category-link">
+                                <span>Tips & Tricks</span>
+                                <span class="badge bg-primary rounded-pill">8</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2">
+                            <a href="#" class="blog-category-link">
+                                <span>Case Studies</span>
+                                <span class="badge bg-primary rounded-pill">5</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2">
+                            <a href="#" class="blog-category-link">
+                                <span>Updates</span>
+                                <span class="badge bg-primary rounded-pill">7</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 px-0 py-2">
+                            <a href="#" class="blog-category-link">
+                                <span>Security</span>
+                                <span class="badge bg-primary rounded-pill">3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Popular Posts -->
+            <div class="card border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h3 class="h5 mb-3">Popular Posts</h3>
+
+                    <div class="popular-post d-flex mb-3">
+                        <div class="popular-post-img me-3">
+                            <img src="https://source.unsplash.com/random/100x100/?pdf" alt="Popular post" class="rounded">
+                        </div>
+                        <div class="popular-post-content">
+                            <h4 class="h6 mb-1">How to Create Interactive PDFs</h4>
+                            <p class="small text-muted mb-0">March 28, 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="popular-post d-flex mb-3">
+                        <div class="popular-post-img me-3">
+                            <img src="https://source.unsplash.com/random/100x100/?ai" alt="Popular post" class="rounded">
+                        </div>
+                        <div class="popular-post-content">
+                            <h4 class="h6 mb-1">AI Ethics in Document Processing</h4>
+                            <p class="small text-muted mb-0">March 20, 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="popular-post d-flex">
+                        <div class="popular-post-img me-3">
+                            <img src="https://source.unsplash.com/random/100x100/?document" alt="Popular post" class="rounded">
+                        </div>
+                        <div class="popular-post-content">
+                            <h4 class="h6 mb-1">Document Automation for Small Businesses</h4>
+                            <p class="small text-muted mb-0">March 15, 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="card border-0 rounded-4">
+                <div class="card-body p-4">
+                    <h3 class="h5 mb-3">Subscribe to Our Newsletter</h3>
+                    <p class="small mb-3">Get the latest updates, tips, and exclusive content delivered to your inbox.</p>
+                    <form>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="your@email.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    border-radius: 2px;
+}
+
+.blog-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.featured-blog-card {
+    position: relative;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 20px;
+    left: -35px;
+    background: #6c5ce7;
+    color: white;
+    padding: 5px 40px;
+    transform: rotate(-45deg);
+    z-index: 1;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.blog-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blog-category {
+    display: inline-block;
+    padding: 3px 10px;
+    background-color: rgba(108, 92, 231, 0.1);
+    color: #6c5ce7;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.blog-date {
+    font-size: 12px;
+    color: #a0a0a0;
+}
+
+.blog-stats {
+    display: flex;
+    align-items: center;
+}
+
+.blog-stats span {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.btn-link {
+    color: #6c5ce7;
+    text-decoration: none;
+    padding: 0;
+}
+
+.btn-link:hover {
+    color: #a29bfe;
+}
+
+.pagination .page-link {
+    color: #6c5ce7;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.blog-category-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #d1d1d1;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.blog-category-link:hover {
+    color: #6c5ce7;
+}
+
+.popular-post {
+    transition: transform 0.2s ease;
+}
+
+.popular-post:hover {
+    transform: translateX(5px);
+}
+
+.popular-post-img img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.card {
+    background-color: #ffffff;
+    color: #000000;
+}
+</style>
+{% endblock %}

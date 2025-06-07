@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+
+{% block title %}Pricing - Fixio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">Pricing Plans</h1>
+            <div class="separator-line mx-auto mb-4"></div>
+            <p class="lead text-secondary">Choose the plan that's right for you</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <!-- Free Tier -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card pricing-card h-100">
+                <div class="card-header text-center py-4">
+                    <h3 class="pricing-title mb-0">Free</h3>
+                </div>
+                <div class="card-body">
+                    <div class="pricing-price text-center mb-4">
+                        <span class="price">$0</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Access to all basic PDF tools</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Basic image editing tools</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Document conversion tools</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Up to 5 operations per day</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Files up to 10MB</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-times feature-unavailable"></i>
+                            <span>Supported by ads</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-times feature-unavailable"></i>
+                            <span>Batch processing</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-times feature-unavailable"></i>
+                            <span>Priority processing</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center py-4 bg-transparent">
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary btn-lg">Get Started</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pro Tier -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card pricing-card pricing-featured h-100">
+                <div class="pricing-ribbon">Popular</div>
+                <div class="card-header text-center py-4">
+                    <h3 class="pricing-title mb-0">Pro</h3>
+                </div>
+                <div class="card-body">
+                    <div class="pricing-price text-center mb-4">
+                        <span class="price">$5</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>All features from Free tier</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Ad-free experience</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Unlimited operations</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Files up to 100MB</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Batch processing</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Priority processing</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Advanced AI tools</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Email support</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center py-4 bg-transparent">
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Upgrade to Pro</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enterprise Tier -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card pricing-card h-100">
+                <div class="card-header text-center py-4">
+                    <h3 class="pricing-title mb-0">Enterprise</h3>
+                </div>
+                <div class="card-body">
+                    <div class="pricing-price text-center mb-4">
+                        <span class="price">Custom</span>
+                        <span class="period">pricing</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>All features from Pro tier</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Custom branding</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>API access</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Files up to 1GB</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>User management</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Usage analytics</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Advanced security features</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check feature-available"></i>
+                            <span>Dedicated support</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center py-4 bg-transparent">
+                    <a href="{{ url_for('static_pages.support') }}" class="btn btn-outline-primary btn-lg">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card faq-card bg-dark border-0 rounded-4 p-4 shadow-sm">
+                <div class="card-body">
+                    <h3 class="h4 mb-4 text-center">Frequently Asked Questions</h3>
+                    
+                    <div class="accordion" id="pricingFAQ">
+                        <div class="accordion-item bg-dark">
+                            <h4 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                                    Can I upgrade or downgrade my plan at any time?
+                                </button>
+                            </h4>
+                            <div id="faqOne" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    Yes, you can upgrade to a Pro plan at any time. If you need to downgrade, you can do so at the end of your current billing cycle.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item bg-dark">
+                            <h4 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                                    Do you offer discounts for annual subscriptions?
+                                </button>
+                            </h4>
+                            <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    Yes, we offer a 20% discount when you subscribe for an annual plan.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item bg-dark">
+                            <h4 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                                    Do you offer educational discounts?
+                                </button>
+                            </h4>
+                            <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    Yes, we offer special pricing for educational institutions. Please contact our support team for more details.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item bg-dark">
+                            <h4 class="accordion-header">
+                                <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">
+                                    What payment methods do you accept?
+                                </button>
+                            </h4>
+                            <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    We accept all major credit cards, PayPal, and bank transfers for Enterprise plans.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto text-center">
+            <h2 class="h3 mb-4">Still Have Questions?</h2>
+            <p class="mb-4">Our support team is here to help you choose the perfect plan for your needs.</p>
+            <a href="{{ url_for('static_pages.support') }}" class="btn btn-primary">
+                <i class="fas fa-headset me-2"></i>Contact Support
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    border-radius: 2px;
+}
+
+.pricing-card {
+    border: none;
+    border-radius: 1rem;
+    background-color: #1e1f26;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-featured {
+    border: 2px solid #6c5ce7;
+    transform: scale(1.05);
+}
+
+.pricing-featured:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.pricing-ribbon {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    transform: rotate(45deg);
+    background-color: #6c5ce7;
+    color: white;
+    padding: 5px 40px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.pricing-title {
+    color: #fff;
+    font-weight: 600;
+}
+
+.pricing-price {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.pricing-price:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: rgba(108, 92, 231, 0.5);
+}
+
+.pricing-price .price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #6c5ce7;
+}
+
+.pricing-price .period {
+    font-size: 1rem;
+    color: #a0a0a0;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.pricing-features li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.pricing-features li i {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.feature-available {
+    color: #6c5ce7;
+}
+
+.feature-unavailable {
+    color: #b2bec3;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: #6c5ce7;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(108, 92, 231, 0.5);
+}
+
+.accordion-item {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 10px;
+}
+
+.faq-card .accordion-body {
+    color: #d1d1d1;
+}
+</style>
+{% endblock %}

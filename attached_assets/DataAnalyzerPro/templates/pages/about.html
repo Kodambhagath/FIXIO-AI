@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - Fixio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">About Fixio</h1>
+            <div class="separator-line mx-auto mb-4"></div>
+            <p class="lead text-secondary">Your AI-enhanced toolkit for digital document and media workflows</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card bg-dark border-0 rounded-4 p-4 shadow-sm text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <h2 class="h3 mb-4 text-white">Our Mission</h2>
+                            <p class="mb-3">Fixio is a powerful, AI-enhanced online toolkit designed to simplify digital document and media workflows. From PDFs to images, spreadsheets, and presentations, Fixio brings all tools together in one smooth, user-first interface.</p>
+                            <p>Our mission is to empower creators, professionals, and students with tools that are smart, fast, and accessible—wherever they are.</p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="about-icon-wrapper">
+                                <i class="fas fa-file-alt about-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card bg-dark border-0 rounded-4 p-4 shadow-sm text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center order-md-1 order-2">
+                            <div class="about-icon-wrapper">
+                                <i class="fas fa-brain about-icon"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4 mb-md-0 order-md-2 order-1">
+                            <h2 class="h3 mb-4 text-white">Our Vision</h2>
+                            <p class="mb-3">We believe that powerful document editing tools should be accessible to everyone, not just those with expensive software or technical expertise.</p>
+                            <p>Fixio is built on the principle that AI should enhance human creativity, not replace it. Our tools are designed to handle the tedious aspects of document work, letting you focus on content and creation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card bg-dark border-0 rounded-4 p-4 shadow-sm text-white">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <h2 class="h3 mb-4 text-white">Our Values</h2>
+                            <ul class="list-unstyled values-list">
+                                <li class="mb-3">
+                                    <span class="value-icon"><i class="fas fa-shield-alt"></i></span>
+                                    <span class="value-text"><strong>Privacy First:</strong> Your files are yours alone. We don't store them.</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="value-icon"><i class="fas fa-magic"></i></span>
+                                    <span class="value-text"><strong>Smart Simplicity:</strong> Complex tools with intuitive interfaces.</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="value-icon"><i class="fas fa-universal-access"></i></span>
+                                    <span class="value-text"><strong>Accessibility:</strong> Tools that work for everyone, everywhere.</span>
+                                </li>
+                                <li>
+                                    <span class="value-icon"><i class="fas fa-bolt"></i></span>
+                                    <span class="value-text"><strong>Speed:</strong> Get things done quickly without sacrificing quality.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="about-icon-wrapper">
+                                <i class="fas fa-check-circle about-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto text-center">
+            <h2 class="h3 mb-4">Start Using Fixio Today</h2>
+            <p class="mb-4">Experience the power of AI-enhanced document tools designed with users in mind.</p>
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-tools me-2"></i>Explore Our Tools
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    border-radius: 2px;
+}
+
+.about-icon-wrapper {
+    width: 150px;
+    height: 150px;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.about-icon {
+    font-size: 64px;
+    color: #6c5ce7;
+}
+
+.values-list .value-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(108, 92, 231, 0.1);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    margin-right: 12px;
+    color: #6c5ce7;
+}
+
+.values-list .value-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+</style>
+{% endblock %}

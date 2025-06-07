@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Image Converter - Fixio{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Image Converter</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mb-3">Image Converter</h1>
+        <p class="lead">Convert images between PNG, JPG and other formats</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <form action="{{ url_for('image_tools.image_converter_process') }}" method="post" enctype="multipart/form-data" class="processing-form">
+                    <div class="file-upload-container mb-4">
+                        <div class="file-upload">
+                            <i class="fas fa-image file-upload-icon"></i>
+                            <p class="upload-text mb-2">Click or drag images here to upload</p>
+                            <p class="upload-hint text-muted">Supported formats: JPG, PNG, JPEG, GIF</p>
+                            <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif" class="file-input d-none">
+                        </div>
+                        <div class="file-list mt-3"></div>
+                    </div>
+                    
+                    <div class="form-group mb-4">
+                        <label for="target_format" class="form-label">Convert to:</label>
+                        <select class="form-select" id="target_format" name="target_format">
+                            <option value="png">PNG</option>
+                            <option value="jpg">JPG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="gif">GIF</option>
+                        </select>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-exchange-alt me-2"></i>Convert Image
+                        </button>
+                    </div>
+                </form>
+                
+                {% if result_file %}
+                <div class="mt-4 preview-area">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>Image converted successfully!
+                    </div>
+                    <div class="text-center mt-3">
+                        <img src="{{ url_for('image_tools.preview_image', filename=result_file) }}" class="img-fluid mb-3 preview-image" alt="Converted image preview">
+                        <div>
+                            <a href="{{ url_for('image_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                                <i class="fas fa-download me-2"></i>Download Converted Image
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card bg-dark mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">About Image Formats</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-file-image me-2"></i>PNG</h6>
+                        <p>Best for: Graphics, logos, images with transparency</p>
+                        <p>Lossless compression, supports transparency</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-file-image me-2"></i>JPG/JPEG</h6>
+                        <p>Best for: Photos, complex images</p>
+                        <p>Smaller file size, lossy compression</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-file-image me-2"></i>GIF</h6>
+                        <p>Best for: Simple animations, limited colors</p>
+                        <p>Supports animation, limited to 256 colors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
