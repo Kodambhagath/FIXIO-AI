@@ -2,16 +2,21 @@ import os
 from PIL import Image
 import logging
 
-# Try to import rembg, but handle it gracefully if it fails
-try:
-    from rembg import remove
-    REMBG_AVAILABLE = True
-except (ImportError, RuntimeError, Exception) as e:
-    logging.warning(f"Background removal functionality is not available: {str(e)}")
-    REMBG_AVAILABLE = False
-    # Define a placeholder for the remove function to avoid unbound errors
-    def remove(image_data):
-        raise RuntimeError("Background removal not available")
+# Lazy import for rembg to avoid slow startup
+REMBG_AVAILABLE = None
+_rembg_remove = None
+
+def _get_rembg_remove():
+    global REMBG_AVAILABLE, _rembg_remove
+    if REMBG_AVAILABLE is None:
+        try:
+            from rembg import remove
+            _rembg_remove = remove
+            REMBG_AVAILABLE = True
+        except (ImportError, RuntimeError, Exception) as e:
+            logging.warning(f"Background removal functionality is not available: {str(e)}")
+            REMBG_AVAILABLE = False
+    return _rembg_remove if REMBG_AVAILABLE else None
 
 def convert_image(input_path, output_path, target_format):
     """
@@ -51,8 +56,9 @@ def remove_background(input_path, output_path):
     Returns:
         tuple: (success, message) - (True, "") if successful, (False, error_message) otherwise
     """
-    # Check if rembg is available
-    if not REMBG_AVAILABLE:
+    # Get rembg remove function (lazy loaded)
+    rembg_remove = _get_rembg_remove()
+    if not rembg_remove:
         return False, "Background removal functionality is not available in this environment."
     
     try:
@@ -61,9 +67,9 @@ def remove_background(input_path, output_path):
             input_data = input_file.read()
         
         # Process the image
-        output_data = remove(input_data)
+        output_data = rembg_remove(input_data)
         
-        # Save the processed image
+        # Save the processed image (rembg returns bytes)
         with open(output_path, 'wb') as output_file:
             output_file.write(output_data)
         
@@ -130,7 +136,9 @@ def compress_image(input_path, output_path, quality=70):
 
 def format_file_size(size_bytes):
     """Format file size in bytes to human-readable format"""
-    for unit in ['B', 'KB', 'MB', 'GB']:
+    unit = 'B'
+    for u in ['B', 'KB', 'MB', 'GB']:
+        unit = u
         if size_bytes < 1024.0 or unit == 'GB':
             break
         size_bytes /= 1024.0
