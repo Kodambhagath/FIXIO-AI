@@ -30,7 +30,7 @@
                         </div>
                         <div class="file-list mt-3"></div>
                     </div>
-                    
+
                     <div class="form-group mb-4">
                         <label for="target_format" class="form-label">Convert to:</label>
                         <select class="form-select" id="target_format" name="target_format">
@@ -40,14 +40,14 @@
                         </select>
                         <small class="form-text text-muted">Note: Available conversion options will depend on the source file format.</small>
                     </div>
-                    
+
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-exchange-alt me-2"></i>Convert Document
                         </button>
                     </div>
                 </form>
-                
+
                 {% if result_file %}
                 <div class="mt-4 preview-area">
                     <div class="alert alert-success">
@@ -62,7 +62,7 @@
                 {% endif %}
             </div>
         </div>
-        
+
         <div class="card bg-dark mt-4">
             <div class="card-header">
                 <h5 class="mb-0">Supported Conversions</h5>
@@ -92,8 +92,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="alert alert-info mt-3">
+                <div class="alert alert-info mt-3" style="color: white">
                     <i class="fas fa-info-circle me-2"></i>During conversion, some complex formatting may be lost depending on the source and target formats.
+                </div>
+                <div class="alert alert-info" style="color: white">
+                    <i class="fas fa-info-circle me-2"></i>Note: Available conversion options will depend on the source file format.
                 </div>
             </div>
         </div>
