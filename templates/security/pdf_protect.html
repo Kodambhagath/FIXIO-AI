@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block title %}PDF Protection - Fixio{% endblock %}
+
+{% block head_extra %}
+<style>
+    .protection-tab {
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .protection-tab.active {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+    }
+    .protection-option {
+        display: none;
+    }
+    .protection-option.active {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">PDF Protection</h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-secondary mb-4">Secure your PDF documents with password protection, time lock, or view-only restrictions.</p>
+                    
+                    <div class="protection-tabs d-flex justify-content-around mb-4">
+                        <div class="protection-tab active" data-option="password">
+                            <i class="fas fa-lock me-2"></i>Password
+                        </div>
+                        <div class="protection-tab" data-option="time-lock">
+                            <i class="fas fa-clock me-2"></i>Time Lock
+                        </div>
+                        <div class="protection-tab" data-option="view-only">
+                            <i class="fas fa-eye me-2"></i>View Only
+                        </div>
+                    </div>
+                    
+                    <form action="{{ url_for('security_tools.pdf_protect') }}" method="POST" enctype="multipart/form-data" id="pdf-protect-form">
+                        <div class="file-upload mb-4">
+                            <i class="fas fa-file-pdf file-upload-icon"></i>
+                            <h5 class="file-upload-text">Drag & Drop your PDF file here</h5>
+                            <p class="file-upload-subtext">or click to browse files</p>
+                            <input type="file" name="file" id="file-input" class="form-control visually-hidden" accept=".pdf" required>
+                        </div>
+                        
+                        <div id="file-details" class="mb-4" style="display: none;">
+                            <div class="file-item">
+                                <i class="fas fa-file-pdf file-icon"></i>
+                                <div class="file-name" id="file-name"></div>
+                                <div class="file-size" id="file-size"></div>
+                                <div class="remove-file">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" name="protection_type" id="protection_type" value="password">
+                        
+                        <div class="protection-option active" id="password-option">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter a secure password">
+                            </div>
+                            <div class="mb-4">
+                                <label for="confirm-password" class="form-label">Confirm Password</label>
+                                <input type="password" name="confirm_password" id="confirm-password" class="form-control" placeholder="Confirm your password">
+                            </div>
+                        </div>
+                        
+                        <div class="protection-option" id="time-lock-option">
+                            <div class="mb-4">
+                                <label for="time-lock-date" class="form-label">Lock Until</label>
+                                <input type="date" name="time_lock_date" id="time-lock-date" class="form-control">
+                                <div class="form-text">The PDF will be locked until this date.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="protection-option" id="view-only-option">
+                            <div class="alert alert-info mb-4">
+                                <p class="mb-0">View-Only Mode prevents the PDF from being edited, printed, or copied. Recipients will only be able to view the document.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-shield-alt me-2"></i>Protect PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 d-none d-lg-block">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">How It Works</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6><i class="fas fa-lock text-primary me-2"></i>Password Protection</h6>
+                        <p class="text-secondary small">Secure your PDF with a password. Recipients will need to enter the password to open the document.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6><i class="fas fa-clock text-primary me-2"></i>Time Lock Protection</h6>
+                        <p class="text-secondary small">Lock your PDF until a specific date. The document will be inaccessible until the specified date.</p>
+                    </div>
+                    
+                    <div>
+                        <h6><i class="fas fa-eye text-primary me-2"></i>View-Only Protection</h6>
+                        <p class="text-secondary small">Restrict editing, printing, and copying. Recipients can only view the document without modifying it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // File upload handling
+        const fileUploadArea = document.querySelector('.file-upload');
+        const fileInput = document.getElementById('file-input');
+        const fileDetails = document.getElementById('file-details');
+        const fileName = document.getElementById('file-name');
+        const fileSize = document.getElementById('file-size');
+        const removeFile = document.querySelector('.remove-file');
+        
+        // Protection tabs handling
+        const protectionTabs = document.querySelectorAll('.protection-tab');
+        const protectionOptions = document.querySelectorAll('.protection-option');
+        const protectionTypeInput = document.getElementById('protection_type');
+        
+        // Handle file upload area click
+        fileUploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+        
+        // Handle file drag and drop
+        fileUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            fileUploadArea.classList.add('border-primary');
+        });
+        
+        fileUploadArea.addEventListener('dragleave', function() {
+            fileUploadArea.classList.remove('border-primary');
+        });
+        
+        fileUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            fileUploadArea.classList.remove('border-primary');
+            
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelection();
+            }
+        });
+        
+        // Handle file input change
+        fileInput.addEventListener('change', handleFileSelection);
+        
+        function handleFileSelection() {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                fileDetails.style.display = 'block';
+                fileUploadArea.style.display = 'none';
+            }
+        }
+        
+        // Handle file removal
+        removeFile.addEventListener('click', function() {
+            fileInput.value = '';
+            fileDetails.style.display = 'none';
+            fileUploadArea.style.display = 'flex';
+        });
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Handle protection tabs
+        protectionTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                protectionTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Get option value
+                const option = this.getAttribute('data-option');
+                
+                // Hide all options
+                protectionOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // Show selected option
+                if (option === 'password') {
+                    document.getElementById('password-option').classList.add('active');
+                    protectionTypeInput.value = 'password';
+                } else if (option === 'time-lock') {
+                    document.getElementById('time-lock-option').classList.add('active');
+                    protectionTypeInput.value = 'time_lock';
+                } else if (option === 'view-only') {
+                    document.getElementById('view-only-option').classList.add('active');
+                    protectionTypeInput.value = 'view_only';
+                }
+            });
+        });
+        
+        // Form validation
+        const form = document.getElementById('pdf-protect-form');
+        form.addEventListener('submit', function(e) {
+            const protectionType = protectionTypeInput.value;
+            
+            if (protectionType === 'password') {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (!password) {
+                    e.preventDefault();
+                    alert('Please enter a password');
+                } else if (password !== confirmPassword) {
+                    e.preventDefault();
+                    alert('Passwords do not match');
+                }
+            } else if (protectionType === 'time_lock') {
+                const timeLockDate = document.getElementById('time-lock-date').value;
+                
+                if (!timeLockDate) {
+                    e.preventDefault();
+                    alert('Please select a date');
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

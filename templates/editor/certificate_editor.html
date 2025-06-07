@@ -1,0 +1,480 @@
+{% extends "base.html" %}
+
+{% block title %}Certificate Editor - Fixio{% endblock %}
+
+{% block head_extra %}
+<style>
+    #canvas-container {
+        position: relative;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        height: 500px;
+        overflow: auto;
+    }
+    #editor-canvas {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        margin: 20px auto;
+        display: block;
+    }
+    .signature-pad {
+        position: relative;
+        display: none;
+        width: 100%;
+        height: 200px;
+        border: 1px solid #e0e0e0;
+        background-color: #fff;
+        margin-bottom: 10px;
+    }
+    .signature-pad canvas {
+        width: 100%;
+        height: 100%;
+    }
+    .controls {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Certificate Editor</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Edit certificates by adding text, signatures, and logos. Supports PDF and image files.</p>
+
+                    {% if result_file %}
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-check-circle me-2"></i>Certificate Successfully Edited!</h5>
+                        <p>Your certificate has been edited. You can download it now.</p>
+                        <a href="{{ url_for('editor_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                            <i class="fas fa-download me-2"></i>Download Edited Certificate
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <ul class="nav nav-tabs" id="editorTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="true">
+                                1. Upload Certificate
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab" aria-controls="edit" aria-selected="false">
+                                2. Edit Certificate
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="editorTabsContent">
+                        <!-- Upload Tab -->
+                        <div class="tab-pane fade show active" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+                            <div class="p-3">
+                                <form id="upload-form" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="file" class="form-label">Select Certificate File</label>
+                                        <input type="file" class="form-control" id="file" name="file" accept=".pdf,.png,.jpg,.jpeg" required>
+                                        <div class="form-text">Select a PDF or image file (PNG, JPG) to edit.</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="output_filename" class="form-label">Output Filename</label>
+                                        <input type="text" class="form-control" id="output_filename" name="output_filename" placeholder="edited_certificate.pdf">
+                                        <div class="form-text">The name of the output file. If not provided, a default name will be used.</div>
+                                    </div>
+
+                                    <!-- Hidden fields for editor data -->
+                                    <input type="hidden" id="text_edits" name="text_edits" value="[]">
+                                    <input type="hidden" id="signature_data" name="signature_data">
+                                    <input type="hidden" id="signature_position" name="signature_position" value="{}">
+                                    <input type="hidden" id="logo_position" name="logo_position" value="{}">
+
+                                    <div class="d-grid">
+                                        <button type="button" id="next-btn" class="btn btn-primary">
+                                            <i class="fas fa-arrow-right me-2"></i>Next: Edit Certificate
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Edit Tab -->
+                        <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div id="canvas-container">
+                                            <canvas id="editor-canvas"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                <h5>Add Text</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-2">
+                                                    <label for="text-input" class="form-label">Text</label>
+                                                    <input type="text" class="form-control" id="text-input" placeholder="Enter text">
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="font-size" class="form-label">Font Size</label>
+                                                    <input type="number" class="form-control" id="font-size" value="24" min="8" max="72">
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="text-color" class="form-label">Color</label>
+                                                    <input type="color" class="form-control form-control-color" id="text-color" value="#000000">
+                                                </div>
+                                                <button id="add-text-btn" class="btn btn-primary w-100">Add Text</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                <h5>Add Signature</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="signature-pad">
+                                                    <canvas id="signature-canvas"></canvas>
+                                                </div>
+                                                <button id="show-signature-pad-btn" class="btn btn-outline-secondary mb-2 w-100">Open Signature Pad</button>
+                                                <button id="clear-signature-btn" class="btn btn-outline-danger mb-2 w-100">Clear Signature</button>
+                                                <button id="add-signature-btn" class="btn btn-primary w-100">Add Signature</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                <h5>Add Logo</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-2">
+                                                    <label for="logo_file" class="form-label">Upload Logo</label>
+                                                    <input type="file" class="form-control" id="logo_file" name="logo_file" accept="image/*">
+                                                </div>
+                                                <button id="add-logo-btn" class="btn btn-primary w-100">Add Logo</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid">
+                                            <button type="button" id="submit-btn" class="btn btn-success">
+                                                <i class="fas fa-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/fabric@5.2.1/dist/fabric.min.js"></script>
+<script>
+    // Certificate Editor JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize variables
+        let canvas = new fabric.Canvas('editor-canvas');
+        let signaturePad = null;
+        let textEdits = [];
+        let signatureData = null;
+        let signaturePosition = {};
+        let logoFile = null;
+        let logoPosition = {};
+
+        // Tab navigation
+        document.getElementById('next-btn').addEventListener('click', function() {
+            document.getElementById('edit-tab').click();
+        });
+
+        // Initialize signature pad
+        document.getElementById('show-signature-pad-btn').addEventListener('click', function() {
+            let signatureContainer = document.querySelector('.signature-pad');
+            signatureContainer.style.display = 'block';
+
+            let signatureCanvas = document.getElementById('signature-canvas');
+            signaturePad = new fabric.Canvas('signature-canvas', {
+                isDrawingMode: true
+            });
+
+            signaturePad.freeDrawingBrush.width = 2;
+            signaturePad.freeDrawingBrush.color = '#000000';
+
+            // Resize canvas to fit container
+            signatureCanvas.width = signatureContainer.offsetWidth;
+            signatureCanvas.height = signatureContainer.offsetHeight;
+            signaturePad.setWidth(signatureCanvas.width);
+            signaturePad.setHeight(signatureCanvas.height);
+        });
+
+        // Clear signature
+        document.getElementById('clear-signature-btn').addEventListener('click', function() {
+            if (signaturePad) {
+                signaturePad.clear();
+            }
+        });
+
+        // Add text to canvas
+        document.getElementById('add-text-btn').addEventListener('click', function() {
+            let text = document.getElementById('text-input').value;
+            let fontSize = document.getElementById('font-size').value;
+            let color = document.getElementById('text-color').value;
+
+            if (text) {
+                let textObj = new fabric.Text(text, {
+                    left: 100,
+                    top: 100,
+                    fontSize: parseInt(fontSize),
+                    fill: color,
+                    fontFamily: 'Arial'
+                });
+
+                canvas.add(textObj);
+                canvas.setActiveObject(textObj);
+
+                // Add to text edits tracking
+                trackTextEdit(textObj);
+
+                // Update object on modification
+                textObj.on('modified', function() {
+                    trackTextEdit(textObj);
+                });
+            }
+        });
+
+        // Add signature to canvas
+        document.getElementById('add-signature-btn').addEventListener('click', function() {
+            if (signaturePad && !signaturePad.isEmptyCanvas()) {
+                // Convert signature to data URL
+                let dataURL = signaturePad.toDataURL();
+                signatureData = dataURL;
+
+                // Create fabric image from signature
+                fabric.Image.fromURL(dataURL, function(img) {
+                    img.scale(0.5).set({
+                        left: 200,
+                        top: 300
+                    });
+
+                    canvas.add(img);
+                    canvas.setActiveObject(img);
+
+                    // Track signature position on modification
+                    img.on('modified', function() {
+                        trackSignaturePosition(img);
+                    });
+
+                    // Initial tracking
+                    trackSignaturePosition(img);
+                });
+
+                // Hide signature pad
+                document.querySelector('.signature-pad').style.display = 'none';
+            }
+        });
+
+        // Add logo to canvas
+        document.getElementById('add-logo-btn').addEventListener('click', function() {
+            let logoInput = document.getElementById('logo_file');
+            if (logoInput.files && logoInput.files[0]) {
+                logoFile = logoInput.files[0];
+
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    fabric.Image.fromURL(e.target.result, function(img) {
+                        // Scale logo to reasonable size
+                        let scale = Math.min(100 / img.width, 100 / img.height);
+                        img.scale(scale).set({
+                            left: 50,
+                            top: 50
+                        });
+
+                        canvas.add(img);
+                        canvas.setActiveObject(img);
+
+                        // Track logo position
+                        img.on('modified', function() {
+                            trackLogoPosition(img);
+                        });
+
+                        // Initial tracking
+                        trackLogoPosition(img);
+                    });
+                };
+                reader.readAsDataURL(logoFile);
+            }
+        });
+
+        // Track text edits
+        function trackTextEdit(textObj) {
+            let found = false;
+
+            // Get normalized positions (0-1)
+            let normalizedX = textObj.left / canvas.width;
+            let normalizedY = textObj.top / canvas.height;
+
+            // Update or add text edit
+            for (let i = 0; i < textEdits.length; i++) {
+                if (textEdits[i].id === textObj.id) {
+                    textEdits[i] = {
+                        id: textObj.id,
+                        text: textObj.text,
+                        x: normalizedX,
+                        y: normalizedY,
+                        font_size: textObj.fontSize,
+                        color: textObj.fill
+                    };
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                textEdits.push({
+                    id: textObj.id,
+                    text: textObj.text,
+                    x: normalizedX,
+                    y: normalizedY,
+                    font_size: textObj.fontSize,
+                    color: textObj.fill
+                });
+            }
+
+            // Update hidden form field
+            document.getElementById('text_edits').value = JSON.stringify(textEdits);
+        }
+
+        // Track signature position
+        function trackSignaturePosition(signatureObj) {
+            // Get normalized positions and dimensions
+            signaturePosition = {
+                x: signatureObj.left / canvas.width,
+                y: signatureObj.top / canvas.height,
+                width: (signatureObj.width * signatureObj.scaleX) / canvas.width
+            };
+
+            // Update hidden form field
+            document.getElementById('signature_position').value = JSON.stringify(signaturePosition);
+            document.getElementById('signature_data').value = signatureData;
+        }
+
+        // Track logo position
+        function trackLogoPosition(logoObj) {
+            // Get normalized positions and dimensions
+            logoPosition = {
+                x: logoObj.left / canvas.width,
+                y: logoObj.top / canvas.height,
+                width: (logoObj.width * logoObj.scaleX) / canvas.width
+            };
+
+            // Update hidden form field
+            document.getElementById('logo_position').value = JSON.stringify(logoPosition);
+        }
+
+        // Load certificate preview
+        document.getElementById('file').addEventListener('change', async function(e) {
+            if (this.files && this.files[0]) {
+                let file = this.files[0];
+                let fileType = file.type;
+
+                // Reset canvas
+                canvas.clear();
+                textEdits = [];
+                signatureData = null;
+                signaturePosition = {};
+                logoPosition = {};
+
+                // Show loading indicator
+                const loadingText = new fabric.Text('Loading preview...', {
+                    left: 50,
+                    top: 50,
+                    fontSize: 20,
+                    fill: '#888888'
+                });
+                canvas.add(loadingText);
+                canvas.renderAll();
+
+
+                if (fileType === 'application/pdf') {
+                    try {
+                        // For PDFs, create a temporary preview image
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // Show first page preview
+                        canvas.setWidth(600);
+                        canvas.setHeight(800);
+
+                        const previewText = new fabric.Text('PDF loaded - Ready to edit', {
+                            left: 50,
+                            top: 50,
+                            fontSize: 20,
+                            fill: '#008000'
+                        });
+                        canvas.clear();
+                        canvas.add(previewText);
+
+                        // Enable editing tab
+                        document.getElementById('edit-tab').classList.remove('disabled');
+                        document.getElementById('edit-tab').removeAttribute('disabled');
+                    } catch (error) {
+                        console.error('Error loading PDF:', error);
+                        canvas.clear();
+                        const errorText = new fabric.Text('Error loading PDF. Please try again.', {
+                            left: 50,
+                            top: 50,
+                            fontSize: 20,
+                            fill: '#ff0000'
+                        });
+                        canvas.add(errorText);
+                    }
+                } else if (fileType.startsWith('image/')) {
+                    // For images, load them into the canvas
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        fabric.Image.fromURL(e.target.result, function(img) {
+                            // Scale image to fit canvas
+                            let containerWidth = document.getElementById('canvas-container').offsetWidth - 40;
+                            let scale = containerWidth / img.width;
+
+                            // Set canvas dimensions based on image
+                            canvas.setWidth(img.width * scale);
+                            canvas.setHeight(img.height * scale);
+
+                            // Add image as background
+                            img.set({
+                                selectable: false,
+                                evented: false,
+                                scaleX: scale,
+                                scaleY: scale
+                            });
+
+                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        // Submit the form
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            document.getElementById('upload-form').submit();
+        });
+
+        // Set canvas size initially
+        canvas.setWidth(600);
+        canvas.setHeight(800);
+    });
+</script>
+{% endblock %}

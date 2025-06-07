@@ -1,0 +1,86 @@
+ Pages to Add (Triggered by user navigation button clicks):
+About Us Page
+
+Route: /about
+
+Content:
+
+Fixio is a powerful, AI-enhanced online toolkit designed to simplify digital document and media workflows. From PDFs to images, spreadsheets, and presentations, Fixio brings all tools together in one smooth, user-first interface.
+
+Our mission is to empower creators, professionals, and students with tools that are smart, fast, and accessible—wherever they are.
+
+Features Page
+
+Route: /features
+
+Content:
+
+🔹 PDF Tools (Compress, Merge, Split, OCR, Watermark, Lock/Unlock)
+🔹 Document Editors (Word, Excel, PPT support + AI text editing)
+🔹 Image Editing (Crop, Resize, Convert, BG Remover)
+🔹 AI-Assisted Tools (Text to Excel, AI File Renamer, etc.)
+🔹 Security Tools (PDF Lock, Redact, Compare, Sign)
+
+Pricing Page
+
+Route: /pricing
+
+Content:
+
+Free Tier: Access to all basic PDF, image, and document tools (with ads).
+
+Pro Tier ($5/month): Ad-free, batch processing, priority access.
+
+Enterprise: Custom packages available for schools, companies, and publishers.
+
+Blog Page
+
+Route: /blog
+
+Content:
+
+A space for publishing productivity tips, Fixio feature updates, case studies, and AI-documentation best practices.
+
+FAQ Page
+
+Route: /faq
+
+Content:
+
+Can I use Fixio without signing in? Yes!
+
+Are files stored? No. Fixio processes files in-memory and deletes them immediately.
+
+Is AI editing secure? Yes, we follow top industry standards.
+
+Privacy Policy Page
+
+Route: /privacy
+
+Content:
+
+Fixio values your privacy. We comply with GDPR (EU), CCPA (California), India DPDP, and Brazil LGPD.
+No personal or document data is stored without consent.
+All files are automatically deleted after processing.
+We only use cookies for analytics (opt-out available).
+For more, email privacy@fixio.tools.
+
+Support Page (with AI Chatbot)
+
+Route: /support
+
+Content:
+
+We've replaced traditional contact forms with an intelligent FixioBot that can guide users to features, answer questions, and collect feedback.
+Try typing: “How do I merge PDFs?” or “Edit Excel with text commands.”
+
+🔀 Add Navigation Routing:
+Update your navigation bar (header/footer) to use anchor or link tags that route to these pages using React Router or equivalent, e.g.:
+
+jsx
+Copy
+Edit
+<Link href="/about">About Us</Link>
+<Link href="/features">Features</Link>
+<Link href="/support">Support</Link>
+Each click should dynamically load the respective component/page using React Router, Next.js routes, or HTML-based page switching logic if using plain HTML.

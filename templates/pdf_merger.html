@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% block title %}PDF Merger - Fixio{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">PDF Merger</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mb-3">PDF Merger</h1>
+        <p class="lead">Combine multiple PDF files into a single document</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <form action="{{ url_for('pdf_tools.pdf_merger_process') }}" method="post" enctype="multipart/form-data" class="processing-form">
+                    <div class="form-group mb-4">
+                        <label for="file_count" class="form-label">How many PDFs would you like to merge?</label>
+                        <input type="number" class="form-control" id="file_count" name="file_count" min="2" max="20" value="2" placeholder="Enter number of files">
+                        <div class="form-text">Choose between 2 and 20 files</div>
+                    </div>
+                    
+                    <div id="dynamic-file-uploads" class="mb-4">
+                        <div class="file-upload-container mb-3">
+                            <label class="form-label">File 1</label>
+                            <div class="file-upload">
+                                <i class="fas fa-file-pdf file-upload-icon"></i>
+                                <p class="upload-text mb-2">Click to upload PDF</p>
+                                <input type="file" name="file_1" accept=".pdf" class="file-input d-none" required>
+                            </div>
+                            <div class="file-info"></div>
+                        </div>
+                        
+                        <div class="file-upload-container mb-3">
+                            <label class="form-label">File 2</label>
+                            <div class="file-upload">
+                                <i class="fas fa-file-pdf file-upload-icon"></i>
+                                <p class="upload-text mb-2">Click to upload PDF</p>
+                                <input type="file" name="file_2" accept=".pdf" class="file-input d-none" required>
+                            </div>
+                            <div class="file-info"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="use_multiple_upload" name="use_multiple_upload">
+                            <label class="form-check-label" for="use_multiple_upload">
+                                I prefer to select all files at once (bulk upload)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="bulk-upload-container" class="file-upload-container mb-4" style="display: none;">
+                        <div class="file-upload">
+                            <i class="fas fa-file-pdf file-upload-icon"></i>
+                            <p class="upload-text mb-2">Click or drag PDFs here to upload</p>
+                            <p class="upload-hint text-muted">Select multiple PDF files to merge</p>
+                            <input type="file" name="files" multiple accept=".pdf" class="file-input d-none">
+                        </div>
+                        <div class="file-list mt-3"></div>
+                    </div>
+                    
+                    <div class="form-group mb-4">
+                        <label for="output_filename" class="form-label">Output Filename</label>
+                        <input type="text" class="form-control" id="output_filename" name="output_filename" placeholder="merged_document.pdf" value="merged_document.pdf">
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-object-group me-2"></i>Merge PDFs
+                        </button>
+                    </div>
+                </form>
+                
+                {% if result_file %}
+                <div class="mt-4 preview-area">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>PDF files merged successfully!
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('pdf_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                            <i class="fas fa-download me-2"></i>Download Merged PDF
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card bg-dark mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">How to use the PDF Merger</h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>Choose how many PDF files you want to merge (2-20)</li>
+                    <li>Upload each PDF file individually by clicking on the designated upload areas</li>
+                    <li>Alternatively, check "bulk upload" to select all files at once</li>
+                    <li>The files will be merged in the order they are listed</li>
+                    <li>Optionally change the output filename (default is "merged_document.pdf")</li>
+                    <li>Click "Merge PDFs" to combine the files</li>
+                    <li>Download the resulting merged PDF file</li>
+                </ol>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>The merged PDF will maintain the original quality of each document.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileCountInput = document.getElementById('file_count');
+        const dynamicFileUploads = document.getElementById('dynamic-file-uploads');
+        const bulkUploadCheckbox = document.getElementById('use_multiple_upload');
+        const bulkUploadContainer = document.getElementById('bulk-upload-container');
+        
+        // Initialize file upload containers
+        setupFileUploadContainers();
+        
+        // Update file upload fields when file count changes
+        fileCountInput.addEventListener('change', function() {
+            updateFileUploadFields();
+        });
+        
+        // Toggle between individual uploads and bulk upload
+        bulkUploadCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                dynamicFileUploads.style.display = 'none';
+                bulkUploadContainer.style.display = 'block';
+                
+                // Make individual file inputs not required
+                const fileInputs = dynamicFileUploads.querySelectorAll('input[type="file"]');
+                fileInputs.forEach(input => {
+                    input.required = false;
+                });
+            } else {
+                dynamicFileUploads.style.display = 'block';
+                bulkUploadContainer.style.display = 'none';
+                
+                // Make individual file inputs required again
+                const fileInputs = dynamicFileUploads.querySelectorAll('input[type="file"]');
+                fileInputs.forEach(input => {
+                    input.required = true;
+                });
+            }
+        });
+        
+        // Update file upload fields based on count
+        function updateFileUploadFields() {
+            let count = parseInt(fileCountInput.value);
+            
+            // Enforce min/max constraints
+            if (count < 2) {
+                count = 2;
+                fileCountInput.value = 2;
+            } else if (count > 20) {
+                count = 20;
+                fileCountInput.value = 20;
+            }
+            
+            // Clear existing file upload containers
+            dynamicFileUploads.innerHTML = '';
+            
+            // Create file upload containers based on count
+            for (let i = 1; i <= count; i++) {
+                const container = document.createElement('div');
+                container.className = 'file-upload-container mb-3';
+                container.innerHTML = `
+                    <label class="form-label">File ${i}</label>
+                    <div class="file-upload">
+                        <i class="fas fa-file-pdf file-upload-icon"></i>
+                        <p class="upload-text mb-2">Click to upload PDF</p>
+                        <input type="file" name="file_${i}" accept=".pdf" class="file-input d-none" required>
+                    </div>
+                    <div class="file-info"></div>
+                `;
+                dynamicFileUploads.appendChild(container);
+            }
+            
+            // Setup event listeners for new file upload containers
+            setupFileUploadContainers();
+        }
+        
+        // Setup file upload containers with event listeners
+        function setupFileUploadContainers() {
+            // Setup dynamic file uploads
+            const dynamicContainers = dynamicFileUploads.querySelectorAll('.file-upload-container');
+            dynamicContainers.forEach(container => {
+                const fileUpload = container.querySelector('.file-upload');
+                const fileInput = container.querySelector('input[type="file"]');
+                const fileInfo = container.querySelector('.file-info');
+                
+                fileUpload.addEventListener('click', function() {
+                    fileInput.click();
+                });
+                
+                fileInput.addEventListener('change', function() {
+                    handleFileSelection(this, fileInfo, fileUpload);
+                });
+            });
+            
+            // Setup bulk file upload
+            const bulkFileUpload = bulkUploadContainer.querySelector('.file-upload');
+            const bulkFileInput = bulkUploadContainer.querySelector('input[type="file"]');
+            const bulkFileList = bulkUploadContainer.querySelector('.file-list');
+            
+            bulkFileUpload.addEventListener('click', function() {
+                bulkFileInput.click();
+            });
+            
+            bulkFileInput.addEventListener('change', function() {
+                handleBulkFileSelection(this, bulkFileList);
+            });
+        }
+        
+        // Handle individual file selection
+        function handleFileSelection(input, fileInfo, fileUpload) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                fileInfo.innerHTML = `
+                    <div class="file-item mt-2">
+                        <i class="fas fa-file-pdf me-2 text-primary"></i>
+                        <span class="file-name">${file.name}</span>
+                        <span class="file-size ms-2 text-muted">(${formatFileSize(file.size)})</span>
+                    </div>
+                `;
+                fileUpload.classList.add('file-selected');
+            } else {
+                fileInfo.innerHTML = '';
+                fileUpload.classList.remove('file-selected');
+            }
+        }
+        
+        // Handle bulk file selection
+        function handleBulkFileSelection(input, fileList) {
+            fileList.innerHTML = '';
+            
+            if (input.files && input.files.length > 0) {
+                for (let i = 0; i < input.files.length; i++) {
+                    const file = input.files[i];
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+                        <i class="fas fa-file-pdf me-2 text-primary"></i>
+                        <span class="file-name">${file.name}</span>
+                        <span class="file-size ms-2 text-muted">(${formatFileSize(file.size)})</span>
+                    `;
+                    fileList.appendChild(fileItem);
+                }
+            }
+        }
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

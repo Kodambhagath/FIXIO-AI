@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+
+{% block title %}Support - Fixio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">Support Center</h1>
+            <div class="separator-line mx-auto mb-4"></div>
+            <p class="lead text-secondary">All support is handled via our built-in Fixio Smart Assistant — a chatbot designed to answer FAQs, handle errors, guide you through tools, and even offer advanced solutions.</p>
+            <p class="lead text-secondary mt-3">No more wait times or email threads. Just ask FixioBot.</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card border-0 rounded-4 shadow-sm overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-4 support-sidebar">
+                        <div class="p-4">
+                            <h2 class="h4 mb-4">Contact Options</h2>
+
+                            <div class="contact-method mb-4">
+                                <div class="contact-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <h3 class="h6">AI Chat Assistant</h3>
+                                    <p class="small mb-0">Get instant help 24/7</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-method mb-4">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <h3 class="h6">Email Support</h3>
+                                    <p class="small mb-0">support@fixio.tools</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <h3 class="h6">Knowledge Base</h3>
+                                    <p class="small mb-0">Browse tutorials & guides</p>
+                                </div>
+                            </div>
+
+                            <div class="support-hours mt-5">
+                                <h3 class="h6 mb-3">Support Hours</h3>
+                                <p class="small mb-0">AI Chat: 24/7</p>
+                                <p class="small mb-0">Email Support: Mon-Fri, 9am-6pm EST</p>
+                            </div>
+
+                            <div class="support-resources mt-5">
+                                <h3 class="h6 mb-3">Quick Links</h3>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><a href="{{ url_for('static_pages.faq') }}" class="support-link">FAQ</a></li>
+                                    <li class="mb-2"><a href="{{ url_for('static_pages.privacy') }}" class="support-link">Privacy Policy</a></li>
+                                    <li><a href="{{ url_for('index') }}" class="support-link">Tool Directory</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="p-4">
+                            <div class="chatbot-container">
+                                <div class="chatbot-header mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="chatbot-avatar me-3">
+                                            <i class="fas fa-robot"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="h5 mb-0">FixioBot</h3>
+                                            <p class="small text-muted mb-0">AI Support Assistant</p>
+                                        </div>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-success">Online</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chatbot-messages mb-4" id="chatMessages">
+                                    <div class="message bot-message">
+                                        <div class="message-content">
+                                            <p>👋 Hi there! I'm FixioBot, your AI assistant. How can I help you today?</p>
+                                            <p>You can ask me questions like:</p>
+                                            <ul>
+                                                <li>"How do I merge PDFs?"</li>
+                                                <li>"How to remove image backgrounds?"</li>
+                                                <li>"Edit Excel with text commands"</li>
+                                                <li>"I need help with my subscription"</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Messages will be added here via JavaScript -->
+                                </div>
+
+                                <div class="chatbot-input">
+                                    <form id="chatForm">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="userMessage" placeholder="Type your question here..." required>
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card border-0 rounded-4 p-4 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 mb-4 text-center">Frequently Asked Questions</h2>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="faq-item">
+                                <h3 class="h6 mb-2">How do I reset my password?</h3>
+                                <p class="small mb-0">Click "Forgot Password" on the login page and follow the instructions sent to your email.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="faq-item">
+                                <h3 class="h6 mb-2">How do I cancel my subscription?</h3>
+                                <p class="small mb-0">Go to Account Settings > Billing > Cancel Subscription to cancel your plan.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="faq-item">
+                                <h3 class="h6 mb-2">What payment methods do you accept?</h3>
+                                <p class="small mb-0">We accept all major credit cards and PayPal for online payments.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="faq-item">
+                                <h3 class="h6 mb-2">How do I report a bug?</h3>
+                                <p class="small mb-0">Use the chatbot or email support with details about the issue you encountered.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('static_pages.faq') }}" class="btn btn-outline-primary">View All FAQs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatForm = document.getElementById('chatForm');
+        const userMessageInput = document.getElementById('userMessage');
+        const chatMessages = document.getElementById('chatMessages');
+
+        // Sample responses for the chatbot
+        const botResponses = {
+            'hello': 'Hello! How can I help you today?',
+            'hi': 'Hi there! How can I assist you with Fixio?',
+            'help': 'I\'m here to help! What specifically do you need assistance with?',
+            'merge pdf': 'To merge PDF files, go to our PDF Merger tool in the PDF Tools section. Upload the PDF files you want to combine, arrange them in the desired order, and click "Merge PDFs". You can then download the merged file.',
+            'remove background': 'To remove an image background, navigate to the Background Remover tool in the Image Tools section. Upload your image, and our AI will automatically detect and remove the background, creating a transparent PNG.',
+            'edit excel': 'You can edit Excel files using our AI Excel Assistant. Simply upload your Excel file, then describe in plain language what changes you want to make. For example, "Sort column A alphabetically" or "Create a sum of all values in column B".',
+            'subscription': 'For subscription-related questions, please go to your Account Settings > Billing section. There you can view your current plan, update payment methods, or manage your subscription.',
+            'password': 'To reset your password, click on the "Forgot Password" link on the login page. We\'ll send you an email with instructions to create a new password.',
+            'contact': 'You can reach our support team via email at support@fixio.tools. For Pro and Enterprise users, we also offer priority support with faster response times.',
+            'pricing': 'We offer three plans: Free, Pro ($5/month), and Enterprise (custom pricing). You can view detailed pricing information on our Pricing page.',
+            'refund': 'We offer a 14-day money-back guarantee for Pro subscriptions. Please contact our support team to request a refund if you\'re within this period.',
+            'default': 'I don\'t have specific information about that yet. Please email our support team at support@fixio.tools for more detailed assistance.'
+        };
+
+        // Handle form submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const userMessage = userMessageInput.value.trim();
+            if (!userMessage) return;
+
+            // Add user message to chat
+            addMessage(userMessage, 'user');
+
+            // Clear input
+            userMessageInput.value = '';
+
+            // Simulate bot "typing"
+            setTimeout(function() {
+                // Get bot response
+                const botResponse = getBotResponse(userMessage);
+
+                // Add bot response to chat
+                addMessage(botResponse, 'bot');
+
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        });
+
+        // Function to add message to chat
+        function addMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.innerHTML = `<p>${message}</p>`;
+
+            messageDiv.appendChild(messageContent);
+            chatMessages.appendChild(messageDiv);
+
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to get bot response based on user message
+        function getBotResponse(userMessage) {
+            userMessage = userMessage.toLowerCase();
+
+            // Check each keyword for a match
+            for (const [keyword, response] of Object.entries(botResponses)) {
+                if (userMessage.includes(keyword)) {
+                    return response;
+                }
+            }
+
+            // If no match, return default response
+            return botResponses.default;
+        }
+    });
+</script>
+{% endblock %}
+
+{% block styles %}
+<style>
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    border-radius: 2px;
+}
+
+.support-sidebar {
+    position: relative;
+    background-color: #ffffff; /*Applied change here*/
+    color: #000000; /*Applied change here*/
+}
+
+.support-sidebar:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(to right, #ffffff, transparent); /*Applied change here*/
+    transform: translateX(20px);
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.1); /*Applied change here*/
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: #000; /*Applied change here*/
+}
+
+.contact-info h3 {
+    color: #000; /*Applied change here*/
+    margin-bottom: 5px;
+}
+
+.contact-info p {
+    color: rgba(0, 0, 0, 0.7); /*Applied change here*/
+}
+
+.support-link {
+    color: rgba(0, 0, 0, 0.7); /*Applied change here*/
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.support-link:hover {
+    color: #000; /*Applied change here*/
+    text-decoration: underline;
+}
+
+.chatbot-container {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /*Applied change here*/
+    color: #000000; /*Applied change here*/
+}
+
+.chatbot-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /*Applied change here*/
+}
+
+.chatbot-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 350px;
+    padding-right: 10px;
+    background-color: #ffffff; /*Applied change here*/
+    color: #000000; /*Applied change here*/
+}
+
+.message {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    background-color: #ffffff; /*Applied change here*/
+    color: #000000; /*Applied change here*/
+}
+
+.bot-message .message-content {
+    background-color: rgba(108, 92, 231, 0.1);
+    border-top-left-radius: 2px;
+}
+
+.user-message .message-content {
+    background-color: rgba(108, 92, 231, 0.8);
+    border-top-right-radius: 2px;
+}
+
+.bot-message .message-content p {
+    margin-bottom: 8px;
+}
+
+.bot-message .message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.bot-message .message-content ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.bot-message .message-content li {
+    margin-bottom: 5px;
+}
+
+.faq-item {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+    height: 100%;
+    transition: transform 0.3s ease;
+    background-color: #ffffff; /*Applied change here*/
+    color: #000000; /*Applied change here*/
+}
+
+.faq-item:hover {
+    transform: translateY(-5px);
+    background-color: rgba(108, 92, 231, 0.1);
+}
+
+.faq-item h3 {
+    color: #6c5ce7;
+}
+</style>
+{% endblock %}

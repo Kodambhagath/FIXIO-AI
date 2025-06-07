@@ -1,0 +1,387 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ - Fixio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">Frequently Asked Questions</h1>
+            <div class="separator-line mx-auto mb-4"></div>
+            <p class="lead text-secondary">Find answers to the most common questions about Fixio</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Using Fixio Section -->
+            <div class="faq-category mb-5">
+                <h2 class="h3 mb-4 faq-category-title">
+                    <i class="fas fa-tools me-2"></i>Using Fixio
+                </h2>
+
+                <div class="accordion" id="faqGeneral">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalOne">
+                                Can I use Fixio without signing in?
+                            </button>
+                        </h3>
+                        <div id="generalOne" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Yes! Fixio allows you to use basic features without creating an account. However, signing up gives you access to more features, increased file size limits, and the ability to save your processing history.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalTwo">
+                                What is the maximum file size I can upload?
+                            </button>
+                        </h3>
+                        <div id="generalTwo" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Free users can upload files up to 10MB. Pro users can upload files up to 100MB, and Enterprise users can upload files up to 1GB. If you need to process larger files, please contact our support team.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalThree">
+                                Which file formats does Fixio support?
+                            </button>
+                        </h3>
+                        <div id="generalThree" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Fixio supports a wide range of formats including PDF, Word (DOCX, DOC), Excel (XLSX, XLS, CSV), PowerPoint (PPTX, PPT), images (JPG, PNG, WebP, GIF), and more. The specific formats supported depend on the tool you're using.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalFour">
+                                How do I report bugs or suggest new features?
+                            </button>
+                        </h3>
+                        <div id="generalFour" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                We welcome your feedback! Please visit our <a href="{{ url_for('static_pages.support') }}">Support page</a> to report bugs or suggest new features. Our team reviews all feedback and works to continuously improve Fixio.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalFive">
+                                How to lock/unlock a PDF?
+                            </button>
+                        </h3>
+                        <div id="generalFive" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Navigate to our PDF security tools section to encrypt or decrypt your PDFs with passwords.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalSix">
+                                Can I batch process images?
+                            </button>
+                        </h3>
+                        <div id="generalSix" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Yes, our tools support batch processing for image conversion and optimization.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalSeven">
+                                What file types are supported?
+                            </button>
+                        </h3>
+                        <div id="generalSeven" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                We support all major document, image, and media formats. Check each tool for specific formats.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalEight">
+                                How does AI editing work?
+                            </button>
+                        </h3>
+                        <div id="generalEight" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Our AI models process your content in real-time, offering smart suggestions and automated edits.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#generalNine">
+                                How is my data stored?
+                            </button>
+                        </h3>
+                        <div id="generalNine" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
+                            <div class="accordion-body">
+                                Files are processed in-memory and deleted immediately after completion unless cloud save is enabled.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Privacy & Security Section -->
+            <div class="faq-category mb-5">
+                <h2 class="h3 mb-4 faq-category-title">
+                    <i class="fas fa-shield-alt me-2"></i>Privacy & Security
+                </h2>
+
+                <div class="accordion" id="faqPrivacy">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacyOne">
+                                Are my files stored on your servers?
+                            </button>
+                        </h3>
+                        <div id="privacyOne" class="accordion-collapse collapse" data-bs-parent="#faqPrivacy">
+                            <div class="accordion-body">
+                                No. Fixio processes files in-memory and deletes them immediately after processing. Your files are never permanently stored on our servers. We automatically delete all uploaded files and generated results after 24 hours.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacyTwo">
+                                Is AI editing secure?
+                            </button>
+                        </h3>
+                        <div id="privacyTwo" class="accordion-collapse collapse" data-bs-parent="#faqPrivacy">
+                            <div class="accordion-body">
+                                Yes, our AI features follow top industry standards for security. When using our AI tools, the content is processed securely and not used for training AI models. We prioritize your privacy and data security in all our services.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacyThree">
+                                How is my account information protected?
+                            </button>
+                        </h3>
+                        <div id="privacyThree" class="accordion-collapse collapse" data-bs-parent="#faqPrivacy">
+                            <div class="accordion-body">
+                                Your account information is encrypted and stored securely. We use industry-standard encryption methods and follow best practices for data protection. We never share your personal information with third parties without your consent.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacyFour">
+                                Do you track my activity on Fixio?
+                            </button>
+                        </h3>
+                        <div id="privacyFour" class="accordion-collapse collapse" data-bs-parent="#faqPrivacy">
+                            <div class="accordion-body">
+                                We collect anonymous usage data to improve our services, but we don't track your personal activity. You can opt out of analytics in your account settings. For more information, please see our <a href="{{ url_for('static_pages.privacy') }}">Privacy Policy</a>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing & Subscription Section -->
+            <div class="faq-category mb-5">
+                <h2 class="h3 mb-4 faq-category-title">
+                    <i class="fas fa-credit-card me-2"></i>Billing & Subscription
+                </h2>
+
+                <div class="accordion" id="faqBilling">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#billingOne">
+                                How do I upgrade to a Pro account?
+                            </button>
+                        </h3>
+                        <div id="billingOne" class="accordion-collapse collapse" data-bs-parent="#faqBilling">
+                            <div class="accordion-body">
+                                You can upgrade to a Pro account by visiting the <a href="{{ url_for('static_pages.pricing') }}">Pricing page</a> and selecting the Pro plan. Follow the instructions to complete your purchase. If you're not already signed in, you'll need to create an account first.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#billingTwo">
+                                Can I cancel my subscription at any time?
+                            </button>
+                        </h3>
+                        <div id="billingTwo" class="accordion-collapse collapse" data-bs-parent="#faqBilling">
+                            <div class="accordion-body">
+                                Yes, you can cancel your subscription at any time from your account settings. When you cancel, you'll continue to have access to Pro features until the end of your current billing period.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#billingThree">
+                                Do you offer refunds?
+                            </button>
+                        </h3>
+                        <div id="billingThree" class="accordion-collapse collapse" data-bs-parent="#faqBilling">
+                            <div class="accordion-body">
+                                We offer a 14-day money-back guarantee for Pro subscriptions. If you're not satisfied with your purchase, you can request a refund within 14 days of your initial purchase. Please contact our support team for assistance.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#billingFour">
+                                How do I get an Enterprise quote?
+                            </button>
+                        </h3>
+                        <div id="billingFour" class="accordion-collapse collapse" data-bs-parent="#faqBilling">
+                            <div class="accordion-body">
+                                For Enterprise pricing, please visit our <a href="{{ url_for('static_pages.support') }}">Support page</a> and fill out the contact form. Our sales team will get in touch with you to discuss your specific needs and provide a custom quote.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Questions Section -->
+            <div class="faq-category mb-5">
+                <h2 class="h3 mb-4 faq-category-title">
+                    <i class="fas fa-cogs me-2"></i>Technical Questions
+                </h2>
+
+                <div class="accordion" id="faqTechnical">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#technicalOne">
+                                Which browsers are supported?
+                            </button>
+                        </h3>
+                        <div id="technicalOne" class="accordion-collapse collapse" data-bs-parent="#faqTechnical">
+                            <div class="accordion-body">
+                                Fixio works best on modern browsers like Chrome, Firefox, Safari, and Edge. We recommend keeping your browser updated to the latest version for the best experience.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#technicalTwo">
+                                Can I use Fixio on mobile devices?
+                            </button>
+                        </h3>
+                        <div id="technicalTwo" class="accordion-collapse collapse" data-bs-parent="#faqTechnical">
+                            <div class="accordion-body">
+                                Yes, Fixio is fully responsive and works on mobile devices. However, for complex editing tasks, we recommend using a desktop or laptop computer for the best experience.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#technicalThree">
+                                Do you have an API?
+                            </button>
+                        </h3>
+                        <div id="technicalThree" class="accordion-collapse collapse" data-bs-parent="#faqTechnical">
+                            <div class="accordion-body">
+                                Yes, we offer API access for Enterprise customers. This allows you to integrate Fixio's functionality into your own applications and workflows. Please contact our sales team for more information.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#technicalFour">
+                                How accurate is the AI in editing documents?
+                            </button>
+                        </h3>
+                        <div id="technicalFour" class="accordion-collapse collapse" data-bs-parent="#faqTechnical">
+                            <div class="accordion-body">
+                                Our AI tools are highly accurate but not perfect. They excel at tasks like summarization, formatting, and basic editing. For critical documents, we recommend reviewing AI-generated changes before finalizing them. We continuously improve our AI models based on user feedback.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center mt-4">
+            <h2 class="h3 mb-3">Still Have Questions?</h2>
+            <p class="mb-4">Can't find what you're looking for? Our support team is here to help.</p>
+            <a href="{{ url_for('static_pages.support') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-headset me-2"></i>Contact Support
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    border-radius: 2px;
+}
+
+.faq-category-title {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+    color: #6c5ce7;
+}
+
+.accordion-item {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: #6c5ce7;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(108, 92, 231, 0.5);
+}
+
+.accordion-body {
+    color: #000;
+    line-height: 1.6;
+}
+
+.accordion-body a {
+    color: #a29bfe;
+    text-decoration: none;
+}
+
+.accordion-body a:hover {
+    text-decoration: underline;
+}
+</style>
+{% endblock %}

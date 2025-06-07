@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Document Converter - Fixio{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Document Converter</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 mb-3">Document Converter</h1>
+        <p class="lead">Convert between various document formats</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <form action="{{ url_for('doc_tools.doc_converter_process') }}" method="post" enctype="multipart/form-data" class="processing-form">
+                    <div class="file-upload-container mb-4">
+                        <div class="file-upload">
+                            <i class="fas fa-file-alt file-upload-icon"></i>
+                            <p class="upload-text mb-2">Click or drag document here to upload</p>
+                            <p class="upload-hint text-muted">Supported formats: DOCX, DOC, XLSX, XLS, TXT</p>
+                            <input type="file" name="file" accept=".docx,.doc,.xlsx,.xls,.txt" class="file-input d-none">
+                        </div>
+                        <div class="file-list mt-3"></div>
+                    </div>
+                    
+                    <div class="form-group mb-4">
+                        <label for="target_format" class="form-label">Convert to:</label>
+                        <select class="form-select" id="target_format" name="target_format">
+                            <option value="docx">DOCX</option>
+                            <option value="txt">TXT</option>
+                            <option value="pdf">PDF</option>
+                        </select>
+                        <small class="form-text text-muted">Note: Available conversion options will depend on the source file format.</small>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-exchange-alt me-2"></i>Convert Document
+                        </button>
+                    </div>
+                </form>
+                
+                {% if result_file %}
+                <div class="mt-4 preview-area">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>Document converted successfully!
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('doc_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                            <i class="fas fa-download me-2"></i>Download Converted Document
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card bg-dark mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Supported Conversions</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-bordered">
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DOCX/DOC</td>
+                                <td>PDF, TXT</td>
+                            </tr>
+                            <tr>
+                                <td>XLSX/XLS</td>
+                                <td>PDF</td>
+                            </tr>
+                            <tr>
+                                <td>TXT</td>
+                                <td>DOCX, PDF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>During conversion, some complex formatting may be lost depending on the source and target formats.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

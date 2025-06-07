@@ -1,0 +1,134 @@
+Pasted-Create-a-fully-responsive-and-elegant-full-stack-blog-website-called-KnowLog-KnowLog-is-a-kn-1745141035313.txt
+Create a fully responsive and elegant full-stack blog website called **KnowLog**.
+
+KnowLog is a knowledge-sharing platform tailored for researchers, students, and professionals to write and publish blog articles and research papers. It should combine minimalist design with powerful functionality. Use the following features and visual design instructions:
+
+---
+
+✨ GENERAL FEATURES:
+
+1. **Authentication System:**
+   - Signup/Login pages with email and password.
+   - Profile picture upload during signup.
+   - JWT-based or session-based authentication.
+
+2. **Landing Page:**
+   - Clean hero section with a bold tagline:  
+     _"Where Curiosity Meets Contribution"_
+   - CTA buttons: "Explore Articles" and "Join the Community"
+   - Brief mission statement section with modern icons.
+   - Smooth scroll-down to features section.
+   - Footer with social media links, contact, and about us.
+
+3. **Home Page (for logged-in users):**
+   - Navigation bar with logo, Home, About, Posts, Profile, Logout.
+   - Grid or card layout to showcase recent articles.
+   - Sidebar with:
+     - Popular Tags
+     - Categories (e.g., AI, Psychology, Physics)
+     - Top Authors
+   - “New Post” button in a fixed top-right corner.
+   - Search bar at the top with auto-suggest.
+
+4. **About Page:**
+   - Timeline-style section for platform growth vision.
+   - Cards for mission, core values, and tech stack used.
+
+5. **Posts Page:**
+   - Display list of all blog posts (title, author, date, image preview).
+   - Filter by category, tags, or date.
+   - Like, comment, and share buttons under each preview.
+
+6. **Single Post Page:**
+   - Title, author, image, and publication date.
+   - Content with rich text formatting.
+   - Comment section at the bottom:
+     - Nested comments (threaded replies)
+     - Like and reply to comments
+   - Share buttons (LinkedIn, Twitter, Copy Link)
+
+7. **Post Creation Page:**
+   - Rich text editor (like Quill.js or TipTap)
+   - Input fields: title, tags, category, cover image upload
+   - Preview option before publishing
+
+8. **User Profile Page:**
+   - Profile image, bio, email, interests
+   - List of user’s published articles
+   - Edit Profile button
+
+9. **Admin Panel (Optional):**
+   - View all users/posts
+   - Delete/report flagged posts or comments
+   - User ban feature
+
+10. **LinkedIn Sharing Integration:**
+    - Add OpenGraph meta tags to every post page
+    - LinkedIn share button that links directly to post URL with preview
+
+---
+
+🎨 DESIGN INSTRUCTIONS:
+
+- Use **Tailwind CSS** or **Bootstrap 5** for clean, responsive design.
+- Fonts: “Inter” or “Poppins” for modern, readable typography.
+- Colors:  
+  - Primary: #0E1C36 (Navy)  
+  - Accent: #3B82F6 (Blue)  
+  - Background: #F8FAFC (Off-white)  
+  - Text: #111827 (Charcoal)  
+- Cards:  
+  - Rounded corners (`rounded-2xl`)  
+  - Shadow on hover (`hover:shadow-lg`)  
+  - Smooth transition effects
+
+- Navigation Bar:  
+  - Sticky top navbar  
+  - Responsive hamburger menu for mobile  
+  - Logo on left, nav items on right
+
+- Buttons:  
+  - Primary: Filled blue with white text  
+  - Secondary: Outline gray with dark text  
+  - Hover: Smooth color shift (`transition-all`)
+
+- Responsive Layouts:  
+  - Mobile-first design  
+  - Use grid/flex layouts  
+  - Ensure components stack vertically on smaller screens
+
+- Animations:  
+  - Use **Framer Motion** for subtle animations  
+  - Fade-in effects on scroll  
+  - Button press animations
+
+---
+
+🛠️ TECH STACK:
+
+- **Frontend**: React.js (or Next.js), Tailwind CSS / Bootstrap
+- **Backend**: Node.js with Express.js
+- **Database**: MongoDB with Mongoose
+- **Authentication**: JWT or Firebase Auth
+- **Image Upload**: Cloudinary
+- **Editor**: Quill.js or TipTap rich text editor
+- **LinkedIn Share**: Open Graph tags + Share plugin
+
+---
+
+✅ OPTIONAL ADVANCED FEATURES:
+
+- Save draft posts for later editing
+- Dark mode toggle
+- Notification bell for comments/likes
+- Follow system (follow favorite authors)
+- Analytics dashboard for authors (views, likes, shares)
+- Markdown support for advanced formatting
+- Comment moderation system
+- Email notification system (using Nodemailer)
+
+---
+
+🎯 GOAL:
+
+Create a community-driven platform that looks and feels professional, encourages thoughtful contributions, and promotes collaboration between thinkers. The design should make reading and writing seamless, beautiful, and inspiring

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Privacy Policy - Fixio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 mb-4">Privacy Policy</h1>
+            <div class="separator-line mx-auto mb-4"></div>
+            <p class="lead text-secondary">Effective Date: April 20, 2025</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card border-0 rounded-4 p-4 shadow-sm mb-5">
+                <div class="card-body">
+                    <p class="mb-4">At Fixio, your privacy is our top priority. This Privacy Policy explains how we collect, use, disclose, and safeguard your information.</p>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">1. Information We Collect</h3>
+                        <ul>
+                            <li>Personal Data: Name, email (only when creating an account)</li>
+                            <li>File Data: Uploaded documents for tool processing — never stored longer than needed</li>
+                            <li>Usage Data: For analytics and feature improvement</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">2. Data Usage & AI</h3>
+                        <p>Fixio processes your content using AI models only within your session. No document data is used for training or profiling. You control your files — we never claim ownership.</p>
+                    </div>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">3. Security Practices</h3>
+                        <ul>
+                            <li>HTTPS end-to-end encryption</li>
+                            <li>AES-256 encrypted storage (temporary)</li>
+                            <li>Data auto-deletion after task completion (unless cloud save is enabled)</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">4. Your Rights</h3>
+                        <p>You have the right to:</p>
+                        <ul>
+                            <li>Access and delete your data</li>
+                            <li>Withdraw consent at any time</li>
+                            <li>Export your information</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">5. Compliance With Legal Acts</h3>
+                        <p>Fixio complies with the following regulations:</p>
+                        <ul>
+                            <li>GDPR (EU General Data Protection Regulation)</li>
+                            <li>CCPA (California Consumer Privacy Act)</li>
+                            <li>DPDP Act (India's Digital Personal Data Protection Act, 2023)</li>
+                            <li>LGPD (Brazil's General Data Protection Law)</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">6. Cookies & Analytics</h3>
+                        <p>We use minimal cookies for functionality. No third-party marketing trackers.</p>
+                    </div>
+
+                    <div class="privacy-section mb-5">
+                        <h3 class="h5 mb-3">7. Children's Privacy</h3>
+                        <p>Fixio is not intended for users under 13 years of age.</p>
+                    </div>
+
+                    <div class="privacy-section">
+                        <h3 class="h5 mb-3">8. Policy Updates</h3>
+                        <p>Users will be notified of any updates via email and on our homepage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.separator-line {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    border-radius: 2px;
+}
+
+.privacy-section {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.privacy-section h3 {
+    color: #000;
+}
+
+.privacy-section ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #000;
+}
+
+.privacy-section li {
+    margin-bottom: 0.5rem;
+}
+
+.card {
+    background-color: #fff;
+}
+
+.card-body {
+    color: #000;
+}
+</style>
+{% endblock %}

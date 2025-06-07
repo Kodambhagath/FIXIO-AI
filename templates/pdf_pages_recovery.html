@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}PDF Pages Recovery - Fixio{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">PDF Pages Recovery</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Extract and recover pages from PDF documents. You can select specific pages or extract all pages to create a new PDF document.</p>
+                    
+                    {% if result_file %}
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-check-circle me-2"></i>PDF Successfully Processed!</h5>
+                        <p>Your PDF document has been processed successfully. You can download it now.</p>
+                        <a href="{{ url_for('pdf_tools.download_file', filename=result_file) }}" class="btn btn-success">
+                            <i class="fas fa-download me-2"></i>Download Processed PDF
+                        </a>
+                    </div>
+                    {% endif %}
+                    
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Select PDF File</label>
+                            <input type="file" class="form-control" id="file" name="file" accept=".pdf" required>
+                            <div class="form-text">Select a PDF document to process.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="page_range" class="form-label">Page Range (Optional)</label>
+                            <input type="text" class="form-control" id="page_range" name="page_range" placeholder="e.g., 1-5,8,11-13">
+                            <div class="form-text">Enter the pages you want to extract (e.g., "1-5,8,11-13"). Leave empty to extract all pages.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="output_filename" class="form-label">Output Filename</label>
+                            <input type="text" class="form-control" id="output_filename" name="output_filename" placeholder="recovered_document.pdf">
+                            <div class="form-text">The name of the output PDF file. If not provided, a default name will be used.</div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-file-export me-2"></i>Extract Pages
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>How to use PDF Pages Recovery</h4>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li>Upload a PDF document using the file selector above.</li>
+                        <li>Optionally specify which pages you want to extract in the Page Range field.</li>
+                        <li>Enter a name for the output file or leave it blank to use the default name.</li>
+                        <li>Click "Extract Pages" to process your document.</li>
+                        <li>Download the processed PDF file after it has been created.</li>
+                    </ol>
+                    <p><strong>Tip:</strong> If your PDF has damaged or corrupt pages, this tool will skip those pages and recover the readable ones.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

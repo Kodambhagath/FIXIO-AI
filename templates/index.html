@@ -1,0 +1,608 @@
+{% extends 'base.html' %}
+
+{% block title %}Fixio - AI-Powered Document Management{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Transform Your Documents with AI</h1>
+            <p class="hero-subtitle">Fixio brings together powerful tools for document editing, conversion, and protection. Streamline your workflow with our AI-powered platform designed to make document management effortless.</p>
+
+            <div class="hero-buttons">
+                <a href="#tools" class="btn btn-primary btn-lg">
+                    <i class="fas fa-tools me-2"></i>Explore Tools
+                </a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Sign Up Free
+                </a>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="display-6 text-primary mb-2">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Fast Processing</h4>
+                    <p class="text-secondary">Process files within seconds with our optimized cloud infrastructure</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="display-6 text-primary mb-2">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Secure & Private</h4>
+                    <p class="text-secondary">Your files are processed securely and automatically deleted after 24 hours</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="display-6 text-primary mb-2">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h4>AI-Powered</h4>
+                    <p class="text-secondary">Advanced AI helps you edit and manage documents using natural language</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tools Section -->
+<section id="tools" class="py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-6">
+                <h2 class="mb-1">Powerful Document Tools</h2>
+                <p class="text-secondary mb-0">All the tools you need in one place</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="dashboard-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control" id="tool-search" placeholder="Search tools...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Filter Tabs -->
+        <ul class="nav nav-pills mb-4" id="tools-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all-tools" type="button" role="tab">
+                    All Tools
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pdf-tab" data-bs-toggle="pill" data-bs-target="#pdf-tools" type="button" role="tab">
+                    PDF Tools
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="image-tab" data-bs-toggle="pill" data-bs-target="#image-tools" type="button" role="tab">
+                    Image Tools
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="document-tab" data-bs-toggle="pill" data-bs-target="#document-tools" type="button" role="tab">
+                    Document Tools
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="media-tab" data-bs-toggle="pill" data-bs-target="#media-tools" type="button" role="tab">
+                    Media Tools
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="security-tab" data-bs-toggle="pill" data-bs-target="#security-tools" type="button" role="tab">
+                    Security Tools
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ai-tab" data-bs-toggle="pill" data-bs-target="#ai-tools" type="button" role="tab">
+                    AI Tools
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tools Content -->
+        <div class="tab-content" id="tools-tab-content">
+            <!-- All Tools Tab -->
+            <div class="tab-pane fade show active" id="all-tools" role="tabpanel">
+                <div class="row">
+    <!-- PDF Tools -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-pdf">PDF</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3 class="tool-title">PDF Merger</h3>
+                <p class="tool-description">Combine multiple PDF files into a single document. Organize pages and create a new downloadable PDF.</p>
+                <a href="{{ url_for('pdf_tools.pdf_merger') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Start Merging
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-pdf">PDF</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-stamp"></i>
+                </div>
+                <h3 class="tool-title">Watermark Remover</h3>
+                <p class="tool-description">Remove watermarks from PDF documents to create clean, professional-looking files.</p>
+                <a href="{{ url_for('pdf_tools.watermark_remover') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Remove Watermarks
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-pdf">PDF</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-file-medical-alt"></i>
+                </div>
+                <h3 class="tool-title">PDF Pages Recovery</h3>
+                <p class="tool-description">Extract and recover pages from damaged PDF files. Select specific pages or recover the entire document.</p>
+                <a href="{{ url_for('pdf_tools.pdf_pages_recovery') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Recover Pages
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Tools -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-image">Image</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3 class="tool-title">Image Converter</h3>
+                <p class="tool-description">Convert images between different formats such as JPG, PNG, and more. Maintain image quality during conversion.</p>
+                <a href="{{ url_for('image_tools.image_converter') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Convert Images
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-image">Image</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-cut"></i>
+                </div>
+                <h3 class="tool-title">Background Remover</h3>
+                <p class="tool-description">Automatically remove image backgrounds with AI technology. Create transparent PNG images.</p>
+                <a href="{{ url_for('image_tools.background_remover') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Remove Background
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-image">Image</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                </div>
+                <h3 class="tool-title">Image Compressor</h3>
+                <p class="tool-description">Reduce image file sizes without sacrificing quality. Perfect for web uploads and storage optimization.</p>
+                <a href="{{ url_for('image_tools.image_compressor') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Compress Images
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Tools -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-document">Document</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="tool-title">Document Converter</h3>
+                <p class="tool-description">Convert between various document formats including Word, Excel, and more. Maintain formatting in converted files.</p>
+                <a href="{{ url_for('doc_tools.doc_converter') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Convert Documents
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Utilities -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-document">Utility</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="tool-title">MB/GB Converter</h3>
+                <p class="tool-description">Convert between various file size units. Helpful for understanding storage requirements and file sizes.</p>
+                <a href="{{ url_for('utility_tools.mb_gb_converter') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Convert Units
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Media Tools -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-ai">Media</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3 class="tool-title">Audio to Video</h3>
+                <p class="tool-description">Convert audio files (MP3) to video files (MP4) with customizable backgrounds for sharing on video platforms.</p>
+                <a href="{{ url_for('media_tools.audio_to_video') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Create Video
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor Tools -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-document">Document</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3 class="tool-title">Certificate Editor</h3>
+                <p class="tool-description">Edit certificate files with custom text, signatures, and logos. Perfect for personalizing certificates and documents.</p>
+                <a href="{{ url_for('editor_tools.certificate_editor') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Edit Certificate
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PDF Protection Tool -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="tool-card">
+            <div class="category-badge category-pdf">Security</div>
+            <div class="text-center">
+                <div class="tool-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="tool-title">PDF Protection</h3>
+                <p class="tool-description">Secure your PDF documents with password protection, time lock, or view-only restrictions.</p>
+                <a href="{{ url_for('security_tools.pdf_protect') }}" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-right me-1"></i> Protect PDF
+                </a>
+            </div>
+        </div>
+    </div>
+                </div>
+            </div>
+
+            <!-- PDF Tools Tab -->
+            <div class="tab-pane fade" id="pdf-tools" role="tabpanel">
+                <div class="row">
+                    <!-- PDF Merger -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-pdf">PDF</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <h3 class="tool-title">PDF Merger</h3>
+                                <p class="tool-description">Combine multiple PDF files into a single document. Organize pages and create a new downloadable PDF.</p>
+                                <a href="{{ url_for('pdf_tools.pdf_merger') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Start Merging
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Watermark Remover -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-pdf">PDF</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-stamp"></i>
+                                </div>
+                                <h3 class="tool-title">Watermark Remover</h3>
+                                <p class="tool-description">Remove watermarks from PDF documents to create clean, professional-looking files.</p>
+                                <a href="{{ url_for('pdf_tools.watermark_remover') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Remove Watermarks
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF Pages Recovery -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-pdf">PDF</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-file-medical-alt"></i>
+                                </div>
+                                <h3 class="tool-title">PDF Pages Recovery</h3>
+                                <p class="tool-description">Extract and recover pages from damaged PDF files. Select specific pages or recover the entire document.</p>
+                                <a href="{{ url_for('pdf_tools.pdf_pages_recovery') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Recover Pages
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF Protection -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-pdf">Security</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3 class="tool-title">PDF Protection</h3>
+                                <p class="tool-description">Secure your PDF documents with password protection, time lock, or view-only restrictions.</p>
+                                <a href="{{ url_for('security_tools.pdf_protect') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Protect PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Tools Tab -->
+            <div class="tab-pane fade" id="image-tools" role="tabpanel">
+                <div class="row">
+                    <!-- Image Converter -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-image">Image</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <h3 class="tool-title">Image Converter</h3>
+                                <p class="tool-description">Convert images between different formats such as JPG, PNG, and more. Maintain image quality during conversion.</p>
+                                <a href="{{ url_for('image_tools.image_converter') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Convert Images
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Background Remover -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-image">Image</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-cut"></i>
+                                </div>
+                                <h3 class="tool-title">Background Remover</h3>
+                                <p class="tool-description">Automatically remove image backgrounds with AI technology. Create transparent PNG images.</p>
+                                <a href="{{ url_for('image_tools.background_remover') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Remove Background
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Compressor -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-image">Image</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                </div>
+                                <h3 class="tool-title">Image Compressor</h3>
+                                <p class="tool-description">Reduce image file sizes without sacrificing quality. Perfect for web uploads and storage optimization.</p>
+                                <a href="{{ url_for('image_tools.image_compressor') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Compress Images
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Tools Tab -->
+            <div class="tab-pane fade" id="document-tools" role="tabpanel">
+                <div class="row">
+                    <!-- Document Converter -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-document">Document</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h3 class="tool-title">Document Converter</h3>
+                                <p class="tool-description">Convert between various document formats including Word, Excel, and more. Maintain formatting in converted files.</p>
+                                <a href="{{ url_for('doc_tools.doc_converter') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Convert Documents
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificate Editor -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-document">Document</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <h3 class="tool-title">Certificate Editor</h3>
+                                <p class="tool-description">Edit certificate files with custom text, signatures, and logos. Perfect for personalizing certificates and documents.</p>
+                                <a href="{{ url_for('editor_tools.certificate_editor') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Edit Certificate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Tools Tab -->
+            <div class="tab-pane fade" id="media-tools" role="tabpanel">
+                <div class="row">
+                    <!-- Audio to Video -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-ai">Media</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                                <h3 class="tool-title">Audio to Video</h3>
+                                <p class="tool-description">Convert audio files (MP3) to video files (MP4) with customizable backgrounds for sharing on video platforms.</p>
+                                <a href="{{ url_for('media_tools.audio_to_video') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Create Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Tools Tab -->
+            <div class="tab-pane fade" id="security-tools" role="tabpanel">
+                <div class="row">
+                    <!-- PDF Protection -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-pdf">Security</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3 class="tool-title">PDF Protection</h3>
+                                <p class="tool-description">Secure your PDF documents with password protection, time lock, or view-only restrictions.</p>
+                                <a href="{{ url_for('security_tools.pdf_protect') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Protect PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Tools -->
+            <div class="tab-pane fade" id="ai-tools" role="tabpanel">
+                <div class="row">
+                    <!-- AI Excel Editor -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3 class="tool-title">AI Excel Editor</h3>
+                                <p class="tool-description">Edit Excel files using natural language commands. Let AI handle your spreadsheet modifications.</p>
+                                <a href="{{ url_for('doc_tools.ai_excel_editor') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Edit Excel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Assistant -->
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="tool-card">
+                            <div class="category-badge category-ai">AI</div>
+                            <div class="text-center">
+                                <div class="tool-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h3 class="tool-title">AI Assistant</h3>
+                                <p class="tool-description">Get help with file-related questions and learn how to use our tools effectively.</p>
+                                <a href="{{ url_for('assistant_bp.assistant') }}" class="btn btn-primary mt-3">
+                                    <i class="fas fa-arrow-right me-1"></i> Ask Assistant
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add category badges to existing tool cards in the all tools section -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add category badges to cards in All Tools tab
+        const allToolsCards = document.querySelectorAll('#all-tools .tool-card');
+
+        // PDF Tools
+        allToolsCards[0].insertAdjacentHTML('afterbegin', '<div class="category-badge category-pdf">PDF</div>'); // PDF Merger
+        allToolsCards[1].insertAdjacentHTML('afterbegin', '<div class="category-badge category-pdf">PDF</div>'); // Watermark Remover
+        allToolsCards[2].insertAdjacentHTML('afterbegin', '<div class="category-badge category-pdf">PDF</div>'); // PDF Pages Recovery
+
+        // Image Tools
+        allToolsCards[3].insertAdjacentHTML('afterbegin', '<div class="category-badge category-image">Image</div>'); // Image Converter
+        allToolsCards[4].insertAdjacentHTML('afterbegin', '<div class="category-badge category-image">Image</div>'); // Background Remover
+        allToolsCards[5].insertAdjacentHTML('afterbegin', '<div class="category-badge category-image">Image</div>'); // Image Compressor
+
+        // Document Tools
+        allToolsCards[6].insertAdjacentHTML('afterbegin', '<div class="category-badge category-document">Document</div>'); // Document Converter
+
+        // Utilities
+        allToolsCards[7].insertAdjacentHTML('afterbegin', '<div class="category-badge category-document">Utility</div>'); // MB/GB Converter
+
+        // Media Tools
+        allToolsCards[8].insertAdjacentHTML('afterbegin', '<div class="category-badge category-ai">Media</div>'); // Audio to Video
+
+        // Editor Tools
+        allToolsCards[9].insertAdjacentHTML('afterbegin', '<div class="category-badge category-document">Document</div>'); // Certificate Editor
+
+        // AI Tools
+        allToolsCards[10].insertAdjacentHTML('afterbegin', '<div class="category-badge category-ai">AI</div>'); // AI Assistant
+
+
+        // Tool search functionality
+        const searchInput = document.getElementById('tool-search');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const toolCards = document.querySelectorAll('.tool-card');
+
+            toolCards.forEach(card => {
+                const title = card.querySelector('.tool-title').textContent.toLowerCase();
+                const description = card.querySelector('.tool-description').textContent.toLowerCase();
+                const badge = card.querySelector('.category-badge') ? 
+                    card.querySelector('.category-badge').textContent.toLowerCase() : '';
+
+                const matchesSearch = title.includes(searchTerm) || 
+                                     description.includes(searchTerm) || 
+                                     badge.includes(searchTerm);
+
+                // Get the parent col element to hide/show
+                const cardContainer = card.closest('.col-md-6');
+
+                if (matchesSearch) {
+                    cardContainer.style.display = '';
+                } else {
+                    cardContainer.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
