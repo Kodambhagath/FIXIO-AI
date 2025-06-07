@@ -871,57 +871,60 @@ Management{% endblock %} {% block content %}
             "#all-tools .tool-card",
         );
 
-        // PDF Tools
-        allToolsCards[0].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-pdf">PDF</div>',
-        ); // PDF Merger
-        allToolsCards[1].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-pdf">PDF</div>',
-        ); // Watermark Remover
-        allToolsCards[2].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-pdf">PDF</div>',
-        ); // PDF Pages Recovery
+        // Only add badges if the tool cards exist
+        if (allToolsCards.length >= 10) {
+            // PDF Tools
+            allToolsCards[0].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-pdf">PDF</div>',
+            ); // PDF Merger
+            allToolsCards[1].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-pdf">PDF</div>',
+            ); // Watermark Remover
+            allToolsCards[2].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-pdf">PDF</div>',
+            ); // PDF Pages Recovery
 
-        // Image Tools
-        allToolsCards[3].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-image">Image</div>',
-        ); // Image Converter
-        allToolsCards[4].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-image">Image</div>',
-        ); // Background Remover
-        allToolsCards[5].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-image">Image</div>',
-        ); // Image Compressor
+            // Image Tools
+            allToolsCards[3].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-image">Image</div>',
+            ); // Image Converter
+            allToolsCards[4].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-image">Image</div>',
+            ); // Background Remover
+            allToolsCards[5].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-image">Image</div>',
+            ); // Image Compressor
 
-        // Document Tools
-        allToolsCards[6].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-document">Document</div>',
-        ); // Document Converter
+            // Document Tools
+            allToolsCards[6].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-document">Document</div>',
+            ); // Document Converter
 
-        // Utilities
-        allToolsCards[7].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-document">Utility</div>',
-        ); // MB/GB Converter
+            // Utilities
+            allToolsCards[7].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-document">Utility</div>',
+            ); // MB/GB Converter
 
-        // Media Tools
-        allToolsCards[8].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-ai">Media</div>',
-        ); // Audio to Video
+            // Media Tools
+            allToolsCards[8].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-ai">Media</div>',
+            ); // Audio to Video
 
-        // AI Tools
-        allToolsCards[9].insertAdjacentHTML(
-            "afterbegin",
-            '<div class="category-badge category-ai">AI</div>',
-        ); // AI Assistant
+            // AI Tools
+            allToolsCards[9].insertAdjacentHTML(
+                "afterbegin",
+                '<div class="category-badge category-ai">AI</div>',
+            ); // AI Assistant
+        }
 
         // Tool search functionality
         const searchInput = document.getElementById("tool-search");
